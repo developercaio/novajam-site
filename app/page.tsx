@@ -1,38 +1,60 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { ArrowUpRight, Asterisk, Check, Menu, MessageCircle, X } from 'lucide-react';
-
-const services: [string, string, string, string[]][] = [
-  ['01', 'Sites institucionais', 'Uma presença digital profissional para apresentar sua empresa e transmitir confiança.', ['Design alinhado à sua marca', 'Conteúdo estratégico', 'Experiência em todos os dispositivos']],
-  ['02', 'Landing pages', 'Páginas objetivas para destacar sua oferta e transformar visitas em contatos.', ['Foco em conversão', 'Mensagem clara', 'Estrutura para campanhas']],
-  ['03', 'Redesign de sites', 'Um visual atual, navegação simples e uma experiência melhor para seus clientes.', ['Avaliação do site atual', 'Visual moderno', 'Melhorias de navegação']],
-];
-const faqs: [string, string][] = [
-  ['Quanto tempo leva para fazer meu site?', 'O prazo depende do escopo e do conteúdo. Apresentamos um cronograma antes de começar.'],
-  ['Preciso ter textos e fotos prontos?', 'Não necessariamente. Orientamos você sobre os materiais e ajudamos a organizar o conteúdo.'],
-  ['O site funciona em celular?', 'Sim. O projeto é pensado para desktop, tablet e celular.'],
-  ['Quanto custa criar um site?', 'O investimento varia conforme páginas e funcionalidades. Conte um pouco sobre seu projeto para receber uma proposta.'],
-];
+import {
+  ArrowDown, ArrowRight, ArrowUpRight, Asterisk, Check, ChevronDown,
+  Code2, Layers3, Menu, MessageCircle, MousePointer2, Palette, Sparkles,
+  X, Zap
+} from 'lucide-react';
 
 const whatsapp = 'https://wa.me/5531983365148?text=Olá%2C%20vim%20pelo%20site%20da%20NovaJam%20e%20quero%20conversar%20sobre%20um%20projeto.';
 
+const nav: [string, string][] = [
+  ['Serviços', '#servicos'], ['Projetos', '#projetos'],
+  ['Processo', '#processo'], ['Sobre', '#sobre'],
+];
+
+const services = [
+  { n: '01', icon: Layers3, title: 'Sites institucionais', text: 'Uma presença digital que apresenta sua empresa com clareza, personalidade e credibilidade.', tags: ['Identidade da marca', 'Design responsivo', 'Conteúdo estratégico'] },
+  { n: '02', icon: MousePointer2, title: 'Landing pages', text: 'Páginas focadas em uma mensagem: transformar visitantes interessados em novas conversas.', tags: ['Foco em conversão', 'Experiência objetiva', 'Campanhas digitais'] },
+  { n: '03', icon: Palette, title: 'Redesign de sites', text: 'Damos uma nova vida ao seu site com visual atual, navegação intuitiva e melhor experiência.', tags: ['Visual renovado', 'Navegação simples', 'Mobile first'] },
+];
+
+const steps = [
+  ['01', 'Imersão', 'Entendemos seu negócio, seu público e o que você quer conquistar.'],
+  ['02', 'Direção criativa', 'Definimos estrutura, conteúdo e linguagem visual para sua marca.'],
+  ['03', 'Desenvolvimento', 'Transformamos o projeto em um site rápido, responsivo e funcional.'],
+  ['04', 'Lançamento', 'Revisamos os detalhes e colocamos sua nova presença digital no ar.'],
+];
+
+const faqs = [
+  ['Quanto tempo leva para criar um site?', 'O prazo depende do tamanho e das funcionalidades do projeto. Depois de entender sua necessidade, alinhamos um cronograma claro antes de começar.'],
+  ['Preciso ter textos e fotos prontos?', 'Não necessariamente. Orientamos você sobre os materiais e ajudamos a organizar as informações para que o site conte a história certa.'],
+  ['O site funciona em celular?', 'Sim. A experiência é pensada para diferentes tamanhos de tela, de celulares a computadores.'],
+  ['Como recebo um orçamento?', 'É só chamar a NovaJam no WhatsApp e contar um pouco sobre sua ideia. Vamos entender o escopo e conversar sobre a melhor solução.'],
+];
+
 export default function Home() {
-  const [menu, setMenu] = useState(false);
-  const [faq, setFaq] = useState(0);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [activeFaq, setActiveFaq] = useState<number | null>(0);
+
   const handleNav = (event: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     event.preventDefault();
-    const target = document.getElementById(href.replace('#', ''));
-    target?.scrollIntoView({
+    document.querySelector(href)?.scrollIntoView({
       behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
       block: 'start',
     });
     window.history.replaceState(null, '', href);
-    setMenu(false);
+    setMenuOpen(false);
   };
-  const nav: [string, string][] = [['Serviços','#servicos'],['Projetos','#projetos'],['Como funciona','#processo'],['Sobre nós','#sobre']];
+
   useEffect(() => {
-    const elements = document.querySelectorAll<HTMLElement>('.reveal');
+    const items = document.querySelectorAll<HTMLElement>('[data-reveal]');
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced || !('IntersectionObserver' in window)) {
+      items.forEach((item) => item.classList.add('is-visible'));
+      return;
+    }
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
@@ -40,22 +62,123 @@ export default function Home() {
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12 });
-    elements.forEach((element) => observer.observe(element));
+    }, { threshold: 0.14, rootMargin: '0px 0px -40px 0px' });
+    items.forEach((item) => observer.observe(item));
     return () => observer.disconnect();
   }, []);
-  return <main>
-    <header className="header"><a className="brand" href="#inicio">NovaJam <Asterisk /></a><nav>{nav.map(([t,h])=><a key={h} href={h} onClick={(event)=>handleNav(event,h)}>{t}</a>)}</nav><a className="btn dark navbtn" href={whatsapp} target="_blank" rel="noreferrer">Vamos conversar <ArrowUpRight size={17}/></a><button className="mobile" onClick={()=>setMenu(!menu)} aria-label="Abrir menu">{menu?<X/>:<Menu/>}</button></header>
-    {menu && <div className="mobilemenu">{nav.map(([t,h])=><a key={h} href={h} onClick={(event)=>handleNav(event,h)}>{t}</a>)}<a href={whatsapp} target="_blank" rel="noreferrer">Fale com a gente ↗</a></div>}
-    <section className="hero wrap" id="inicio"><div><div className="eyebrow"><Asterisk size={15}/> TECNOLOGIA PARA QUEM EMPREENDE</div><h1>Seu negócio<br/>merece um<br/><em>site à altura.</em></h1><p className="lead">Criamos sites que apresentam o seu valor, aproximam clientes e abrem novas oportunidades. Sem complicar a sua rotina.</p><div className="actions"><a className="btn purple" href={whatsapp} target="_blank" rel="noreferrer">Fale com a gente <ArrowUpRight size={18}/></a><a className="under" href="#projetos">Conhecer os projetos</a></div><small>Uma boa conversa é o primeiro passo. Sem compromisso.</small></div><div className="visual"><span>IDEIA BOA. PRESENÇA À ALTURA.</span><div className="mock"><div className="mockbar">● ● ● <b>grãocafé · projeto conceitual</b></div><div className="mockbody"><div><b>grão.</b><h2>Seu dia pede<br/>uma pausa.</h2><p>Café especial, comida de verdade e um cantinho para ficar.</p><strong>Conheça o cardápio ↗</strong></div><div className="coffee"/></div></div><div className="phone">grão.<h3>Uma pausa.<br/>Um café.</h3><small>Seu novo lugar favorito no bairro.</small></div></div></section>
-    <section className="intro reveal"><div className="wrap introgrid"><div><span className="eyebrow light">UM BOM SITE FAZ DIFERENÇA</span><h2>Ser visto é só<br/>o começo.</h2></div><p>Seu próximo cliente está procurando. Seu site ajuda a mostrar por que vale a pena escolher você.</p></div></section>
-    <section className="section wrap reveal" id="servicos"><div className="sectionhead"><div className="eyebrow"><Asterisk size={15}/> O SITE CERTO PARA O SEU MOMENTO</div><h2>O site certo para<br/>o seu momento.</h2><p>Da primeira presença digital à próxima fase do seu negócio: encontramos a solução que faz sentido para você.</p></div><div className="cards">{services.map(([n,t,d,points],i)=><article className={i===0?'featured':''} key={n}><span>{n} / SERVIÇO</span><h3>{t}</h3><p>{d}</p><ul>{points.map(p=><li key={p}><Check size={14}/>{p}</li>)}</ul><a href={whatsapp} target="_blank" rel="noreferrer">Fale com a gente <ArrowUpRight size={16}/></a></article>)}</div></section>
-    <section className="about reveal" id="sobre"><div className="wrap aboutgrid"><div className="art"><span>NOVAJAM<br/>DIGITAL</span><b>Ideias boas<br/>merecem espaço.</b></div><div><div className="eyebrow">SOBRE A NOVAJAM</div><h2>Mais que um site.<br/>Um aliado do seu negócio.</h2><p>A gente acredita que toda empresa tem algo especial para mostrar. Nosso trabalho é transformar isso em uma presença digital clara, bonita e que trabalha a favor dos seus objetivos.</p><a className="under" href={whatsapp} target="_blank" rel="noreferrer">Conheça nosso jeito de trabalhar ↗</a></div></div></section>
-    <section className="section wrap reveal" id="projetos"><div className="sectionhead"><div className="eyebrow">IDEIAS QUE GANHAM FORMA NA TELA</div><h2>Ideias que ganham<br/>forma na tela.</h2><p>Projetos conceituais para mostrar como uma boa experiência digital pode valorizar diferentes negócios.</p></div><div className="projects"><article><div className="projectart coffeeart">grão.</div><small>Café · Gastronomia</small><h3>Mais que um site. Um lugar onde dá vontade de ficar.</h3></article><article><div className="projectart archart">forma.</div><small>Arquitetura · Interiores</small><h3>Espaços para viver novas histórias.</h3></article></div></section>
-    <section className="process reveal" id="processo"><div className="wrap"><div className="eyebrow light">DO PRIMEIRO PAPO AO SITE NO AR</div><h2>Do “e se” ao<br/>“tá no ar”.</h2><div className="steps">{([['01','A gente se fala.','Entendemos seu negócio, seus objetivos e o que você precisa alcançar.'],['02','Ideias tomam forma.','Organizamos conteúdo, estrutura e visual para criar uma experiência com a sua cara.'],['03','Seu site acontece.','Desenvolvemos, ajustamos e preparamos tudo para colocar seu site no ar.'],['04','Seguimos juntos.','Depois da publicação, você tem um parceiro para os próximos passos digitais.']] as [string, string, string][]).map(([n,t,d])=><article key={n}><span>{n}</span><h3>{t}</h3><p>{d}</p></article>)}</div></div></section>
-    <section className="section wrap faq reveal"><div><div className="eyebrow">DÚVIDAS ANTES DE COMEÇAR?</div><h2>Pode perguntar.</h2></div><div>{faqs.map(([q,a],i)=><article key={q}><button onClick={()=>setFaq(faq===i?-1:i)}>{q} <span>{faq===i?'−':'+'}</span></button>{faq===i&&<p>{a}</p>}</article>)}</div></section>
-    <section className="contact reveal" id="contato"><div className="wrap contactgrid"><div><div className="eyebrow light">SEU PRÓXIMO CAPÍTULO COMEÇA AQUI</div><h2>Vamos colocar<br/>seu próximo<br/>passo no ar?</h2><p>Tem uma ideia ou precisa de um site para o seu negócio? Chame a NovaJam no WhatsApp. Vamos conversar e encontrar o melhor caminho para o seu projeto.</p></div><div className="contact-cta"><span className="contact-orbit"><MessageCircle size={34}/></span><h3>Seu projeto começa com uma conversa.</h3><p>Atendimento direto pelo WhatsApp, sem formulários e sem complicação.</p><a className="btn dark whatsapp-btn" href={whatsapp} target="_blank" rel="noreferrer">Falar pelo WhatsApp <ArrowUpRight size={18}/></a><small>WhatsApp: (31) 98336-5148</small></div></div></section>
-    <a className="whatsapp-float" href={whatsapp} target="_blank" rel="noreferrer" aria-label="Fale com a NovaJam pelo WhatsApp"><MessageCircle size={24}/></a>
-    <footer><div className="wrap foot"><a className="brand" href="#inicio">NovaJam <Asterisk/></a><span>BOAS IDEIAS MERECEM UMA BOA PRESENÇA.</span><small>© {new Date().getFullYear()} NovaJam. Todos os direitos reservados.</small></div></footer>
-  </main>;
+
+  return (
+    <main>
+      <div className="topline" />
+      <header className="site-header">
+        <a className="logo" href="#inicio" aria-label="NovaJam, início">nova<span>jam</span><Asterisk size={17} /></a>
+        <nav className="desktop-nav" aria-label="Navegação principal">
+          {nav.map(([label, href]) => <a key={href} href={href} onClick={(e) => handleNav(e, href)}>{label}</a>)}
+        </nav>
+        <a className="button button-small button-light header-cta" href={whatsapp} target="_blank" rel="noreferrer">Vamos conversar <ArrowUpRight size={16} /></a>
+        <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? 'Fechar menu' : 'Abrir menu'} aria-expanded={menuOpen}>{menuOpen ? <X /> : <Menu />}</button>
+      </header>
+
+      {menuOpen && <nav className="mobile-nav" aria-label="Navegação mobile">
+        {nav.map(([label, href]) => <a key={href} href={href} onClick={(e) => handleNav(e, href)}>{label}<ArrowUpRight size={17} /></a>)}
+        <a className="mobile-contact" href={whatsapp} target="_blank" rel="noreferrer">Fale com a NovaJam <ArrowUpRight size={17} /></a>
+      </nav>}
+
+      <section className="hero" id="inicio">
+        <div className="hero-copy">
+          <div className="eyebrow"><span className="eyebrow-dot" /> ESTÚDIO DIGITAL · BELO HORIZONTE</div>
+          <h1>Ideias grandes.<br /><span>Presença</span><br /><span className="outline-word">digital.</span></h1>
+          <p className="hero-lead">Criamos experiências digitais que fazem sua marca ser vista, lembrada e escolhida.</p>
+          <div className="hero-actions">
+            <a className="button button-accent" href={whatsapp} target="_blank" rel="noreferrer">Comece seu projeto <ArrowUpRight size={18} /></a>
+            <a className="text-link" href="#projetos" onClick={(e) => handleNav(e, '#projetos')}>Explorar trabalhos <ArrowDown size={16} /></a>
+          </div>
+          <div className="hero-footnote"><span className="status-dot" /> Estratégia, design e tecnologia em um só lugar.</div>
+        </div>
+
+        <div className="hero-art" aria-label="Composição gráfica abstrata representando um projeto digital">
+          <div className="art-grid" />
+          <div className="orbit orbit-one" /><div className="orbit orbit-two" />
+          <div className="art-label label-top">DESIGN COM INTENÇÃO <Asterisk size={14} /></div>
+          <div className="art-card card-back"><span>01 / EXPERIÊNCIA</span><div className="back-lines"><i /><i /><i /></div><b>Clareza em<br />cada detalhe.</b></div>
+          <div className="art-card card-front">
+            <div className="browser-bar"><span /><span /><span /><small>seuprojeto.com.br</small></div>
+            <div className="browser-content"><div className="mini-brand">sua marca<span>.</span></div><div className="mini-kicker">FEITO PARA IR MAIS LONGE</div><div className="mini-headline">O próximo<br />capítulo começa<br /><em>aqui.</em></div><div className="mini-button">Conheça <ArrowUpRight size={12} /></div><div className="mini-shape"><div /></div></div>
+          </div>
+          <div className="floating-note"><Sparkles size={15} /><span>Ideia boa<br /><b>ganha forma.</b></span></div>
+          <div className="art-index">Nº 001 — NOVAJAM®</div>
+        </div>
+        <div className="hero-bottom"><span>ARRASTE PARA DESCOBRIR</span><span className="hero-bottom-line" /><span>01 / 05</span></div>
+      </section>
+
+      <section className="statement" data-reveal>
+        <div className="section-shell statement-inner">
+          <div className="eyebrow eyebrow-dark">NÃO É SÓ SOBRE ESTAR ONLINE</div>
+          <h2>Seu site é o primeiro<br />olá da sua marca<span>.</span></h2>
+          <p>Antes da primeira conversa, antes da proposta, antes da escolha. Uma boa presença digital mostra o valor do seu negócio desde o primeiro clique.</p>
+          <div className="statement-mark"><Asterisk size={54} /></div>
+        </div>
+      </section>
+
+      <section className="services section-shell" id="servicos" data-reveal>
+        <div className="section-heading">
+          <div><div className="eyebrow"><span className="eyebrow-dot" /> O QUE FAZEMOS</div><h2>Digital, do seu<br /><span>jeito.</span></h2></div>
+          <p>As ferramentas certas para apresentar sua marca, conquistar confiança e criar novas oportunidades.</p>
+        </div>
+        <div className="service-grid">
+          {services.map(({ n, icon: Icon, title, text, tags }) => <article className="service-card" key={n}>
+            <div className="service-top"><span>{n} / SERVIÇO</span><Icon size={23} strokeWidth={1.5} /></div>
+            <h3>{title}</h3><p>{text}</p>
+            <ul>{tags.map(tag => <li key={tag}><Check size={14} />{tag}</li>)}</ul>
+            <a href={whatsapp} target="_blank" rel="noreferrer" className="card-link">Vamos conversar <ArrowUpRight size={17} /></a>
+          </article>)}
+        </div>
+      </section>
+
+      <section className="work-section" id="projetos" data-reveal>
+        <div className="section-shell">
+          <div className="section-heading work-heading">
+            <div><div className="eyebrow eyebrow-dark">EXPLORAÇÕES CRIATIVAS</div><h2>Marcas com<br /><span>presença.</span></h2></div>
+            <p>Alguns conceitos visuais para mostrar como estratégia e design podem transformar a percepção de um negócio.</p>
+          </div>
+          <div className="work-grid">
+            <article className="work-item">
+              <div className="work-visual work-cafe"><div className="cafe-top"><span>grão.</span><span>CAFÉ · DESDE 2024</span></div><div className="cafe-main"><small>UM TEMPO PRA VOCÊ</small><strong>Seu dia<br />pede uma<br /><i>pausa.</i></strong><div className="coffee-cup"><div /></div></div><div className="cafe-bottom">CAFÉ ESPECIAL, TODOS OS DIAS ↗</div></div>
+              <div className="work-caption"><div><span>01 — GASTRONOMIA</span><h3>Grão Café</h3></div><span className="concept-tag">CONCEITO</span></div>
+            </article>
+            <article className="work-item">
+              <div className="work-visual work-architecture"><div className="arch-top"><span>forma<span className="lime-dot">.</span></span><span>ARQUITETURA + INTERIORES</span></div><div className="arch-main"><div className="arch-sun" /><div className="arch-block block-a" /><div className="arch-block block-b" /><div className="arch-block block-c" /><strong>Espaços<br />para viver<br /><i>histórias.</i></strong></div><div className="arch-bottom">ARQUITETURA COM SIGNIFICADO ↗</div></div>
+              <div className="work-caption"><div><span>02 — ARQUITETURA</span><h3>Forma Studio</h3></div><span className="concept-tag">CONCEITO</span></div>
+            </article>
+          </div>
+          <p className="work-disclaimer">Os projetos apresentados são estudos conceituais de direção visual.</p>
+        </div>
+      </section>
+
+      <section className="about-section" id="sobre" data-reveal>
+        <div className="section-shell about-layout">
+          <div className="about-graphic"><div className="about-orbit" /><div className="about-big">NJ<span>®</span></div><div className="about-sticker"><Asterisk size={22} /> FEITO PARA<br />FAZER ACONTECER</div><span className="about-coordinates">19°55' S · 43°56' W</span></div>
+          <div className="about-copy"><div className="eyebrow"><span className="eyebrow-dot" /> QUEM SOMOS</div><h2>Pequenos detalhes.<br /><span>Grandes ideias.</span></h2><p>A NovaJam nasceu da vontade de aproximar boas ideias da tecnologia. Acreditamos que toda empresa tem algo único — e que um site bem pensado ajuda o mundo a perceber isso.</p><p>Unimos criatividade, cuidado e desenvolvimento para construir uma presença digital que faça sentido para o seu negócio.</p><a className="text-link dark-link" href={whatsapp} target="_blank" rel="noreferrer">Conheça a NovaJam <ArrowUpRight size={17} /></a></div>
+        </div>
+      </section>
+
+      <section className="process-section section-shell" id="processo" data-reveal>
+        <div className="process-heading"><div className="eyebrow"><span className="eyebrow-dot" /> COMO ACONTECE</div><h2>Do primeiro papo<br />ao <span>site no ar.</span></h2><p>Um processo simples, transparente e colaborativo. Você acompanha cada etapa.</p></div>
+        <div className="steps-grid">{steps.map(([n, title, desc]) => <article className="step" key={n}><span className="step-number">{n}</span><div className="step-line" /><h3>{title}</h3><p>{desc}</p></article>)}</div>
+      </section>
+
+      <section className="faq-section" data-reveal>
+        <div className="section-shell faq-layout"><div><div className="eyebrow"><span className="eyebrow-dot" /> PERGUNTAS FREQUENTES</div><h2>Vamos tirar<br />as dúvidas<span>?</span></h2><p>Se sua pergunta não estiver aqui, chama a gente.</p><a className="text-link dark-link" href={whatsapp} target="_blank" rel="noreferrer">Pergunte pelo WhatsApp <ArrowUpRight size={17} /></a></div>
+          <div className="faq-list">{faqs.map(([question, answer], i) => <article className={activeFaq === i ? 'faq-item open' : 'faq-item'} key={question}><button onClick={() => setActiveFaq(activeFaq === i ? null : i)} aria-expanded={activeFaq === i}><span>{question}</span><ChevronDown size={19} /></button><div className="faq-answer"><p>{answer}</p></div></article>)}</div>
+        </div>
+      </section>
+
+      <section className="contact-section" id="contato" data-reveal>
+        <div className="section-shell contact-inner"><div className="eyebrow eyebrow-dark"><span className="eyebrow-dot" /> SUA PRÓXIMA IDEIA COMEÇA AQUI</div><h2>Vamos fazer<br />algo <span>incrível?</span></h2><p>Conte pra gente o que você está imaginando. A primeira conversa pode ser o começo de algo grande.</p><a className="button button-dark" href={whatsapp} target="_blank" rel="noreferrer"><MessageCircle size={18} /> Chamar no WhatsApp <ArrowUpRight size={18} /></a><div className="contact-spark"><Asterisk size={100} /></div></div>
+      </section>
+
+      <footer className="footer"><div className="section-shell footer-main"><a className="logo footer-logo" href="#inicio">nova<span>jam</span><Asterisk size={17} /></a><span className="footer-slogan">IDEIAS GRANDES. PRESENÇA DIGITAL.</span><a href={whatsapp} target="_blank" rel="noreferrer" className="footer-contact">Vamos conversar <ArrowUpRight size={16} /></a></div><div className="section-shell footer-bottom"><span>© {new Date().getFullYear()} NovaJam. Todos os direitos reservados.</span><span>FEITO COM INTENÇÃO EM BELO HORIZONTE.</span></div></footer>
+      <a className="whatsapp-float" href={whatsapp} target="_blank" rel="noreferrer" aria-label="Fale com a NovaJam pelo WhatsApp"><MessageCircle size={23} /><span>Vamos conversar</span></a>
+    </main>
+  );
 }
