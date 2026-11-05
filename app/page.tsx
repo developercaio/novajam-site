@@ -20,6 +20,16 @@ const whatsapp = 'https://wa.me/5531983365148?text=Olá%2C%20vim%20pelo%20site%2
 export default function Home() {
   const [menu, setMenu] = useState(false);
   const [faq, setFaq] = useState(0);
+  const handleNav = (event: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    event.preventDefault();
+    const target = document.getElementById(href.replace('#', ''));
+    target?.scrollIntoView({
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+      block: 'start',
+    });
+    window.history.replaceState(null, '', href);
+    setMenu(false);
+  };
   const nav: [string, string][] = [['Serviços','#servicos'],['Projetos','#projetos'],['Como funciona','#processo'],['Sobre nós','#sobre']];
   useEffect(() => {
     const elements = document.querySelectorAll<HTMLElement>('.reveal');
@@ -35,8 +45,8 @@ export default function Home() {
     return () => observer.disconnect();
   }, []);
   return <main>
-    <header className="header"><a className="brand" href="#inicio">NovaJam <Asterisk /></a><nav>{nav.map(([t,h])=><a key={h} href={h}>{t}</a>)}</nav><a className="btn dark navbtn" href={whatsapp} target="_blank" rel="noreferrer">Vamos conversar <ArrowUpRight size={17}/></a><button className="mobile" onClick={()=>setMenu(!menu)} aria-label="Abrir menu">{menu?<X/>:<Menu/>}</button></header>
-    {menu && <div className="mobilemenu">{nav.map(([t,h])=><a key={h} href={h} onClick={()=>setMenu(false)}>{t}</a>)}<a href={whatsapp} target="_blank" rel="noreferrer">Fale com a gente ↗</a></div>}
+    <header className="header"><a className="brand" href="#inicio">NovaJam <Asterisk /></a><nav>{nav.map(([t,h])=><a key={h} href={h} onClick={(event)=>handleNav(event,h)}>{t}</a>)}</nav><a className="btn dark navbtn" href={whatsapp} target="_blank" rel="noreferrer">Vamos conversar <ArrowUpRight size={17}/></a><button className="mobile" onClick={()=>setMenu(!menu)} aria-label="Abrir menu">{menu?<X/>:<Menu/>}</button></header>
+    {menu && <div className="mobilemenu">{nav.map(([t,h])=><a key={h} href={h} onClick={(event)=>handleNav(event,h)}>{t}</a>)}<a href={whatsapp} target="_blank" rel="noreferrer">Fale com a gente ↗</a></div>}
     <section className="hero wrap" id="inicio"><div><div className="eyebrow"><Asterisk size={15}/> TECNOLOGIA PARA QUEM EMPREENDE</div><h1>Seu negócio<br/>merece um<br/><em>site à altura.</em></h1><p className="lead">Criamos sites que apresentam o seu valor, aproximam clientes e abrem novas oportunidades. Sem complicar a sua rotina.</p><div className="actions"><a className="btn purple" href={whatsapp} target="_blank" rel="noreferrer">Fale com a gente <ArrowUpRight size={18}/></a><a className="under" href="#projetos">Conhecer os projetos</a></div><small>Uma boa conversa é o primeiro passo. Sem compromisso.</small></div><div className="visual"><span>IDEIA BOA. PRESENÇA À ALTURA.</span><div className="mock"><div className="mockbar">● ● ● <b>grãocafé · projeto conceitual</b></div><div className="mockbody"><div><b>grão.</b><h2>Seu dia pede<br/>uma pausa.</h2><p>Café especial, comida de verdade e um cantinho para ficar.</p><strong>Conheça o cardápio ↗</strong></div><div className="coffee"/></div></div><div className="phone">grão.<h3>Uma pausa.<br/>Um café.</h3><small>Seu novo lugar favorito no bairro.</small></div></div></section>
     <section className="intro reveal"><div className="wrap introgrid"><div><span className="eyebrow light">UM BOM SITE FAZ DIFERENÇA</span><h2>Ser visto é só<br/>o começo.</h2></div><p>Seu próximo cliente está procurando. Seu site ajuda a mostrar por que vale a pena escolher você.</p></div></section>
     <section className="section wrap reveal" id="servicos"><div className="sectionhead"><div className="eyebrow"><Asterisk size={15}/> O SITE CERTO PARA O SEU MOMENTO</div><h2>O site certo para<br/>o seu momento.</h2><p>Da primeira presença digital à próxima fase do seu negócio: encontramos a solução que faz sentido para você.</p></div><div className="cards">{services.map(([n,t,d,points],i)=><article className={i===0?'featured':''} key={n}><span>{n} / SERVIÇO</span><h3>{t}</h3><p>{d}</p><ul>{points.map(p=><li key={p}><Check size={14}/>{p}</li>)}</ul><a href={whatsapp} target="_blank" rel="noreferrer">Fale com a gente <ArrowUpRight size={16}/></a></article>)}</div></section>
