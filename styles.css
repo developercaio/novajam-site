@@ -118,15 +118,49 @@ body {
   transform: translateY(-8px) rotate(-45deg);
 }
 
+#mobileMenuBtn:focus-visible,
+.mobile-nav-link:focus-visible,
+#mobileMenu .btn-primary:focus-visible {
+  outline: 2px solid var(--color-brand-green);
+  outline-offset: 4px;
+}
+
 /* Mobile Drawer */
 .mobile-drawer {
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+  max-height: calc(100dvh - 80px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-bottom: max(2rem, env(safe-area-inset-bottom));
 }
 
 .mobile-drawer.active {
   transform: translateY(0);
   opacity: 1;
   pointer-events: auto;
+}
+
+.mobile-menu-backdrop {
+  transition: opacity 0.3s ease;
+}
+
+.mobile-menu-backdrop.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@media (min-width: 640px) {
+  .mobile-drawer {
+    max-height: calc(100dvh - 90px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-drawer,
+  .mobile-menu-backdrop,
+  .hamburger-bar {
+    transition-duration: 0.01ms !important;
+  }
 }
 
 /* Button & Micro-Interactions */

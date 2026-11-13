@@ -70,7 +70,7 @@
       </div>
 
       <!-- Botão Hamburger Mobile -->
-      <button type="button" id="mobileMenuBtn" class="md:hidden flex flex-col justify-center items-center w-11 h-11 rounded-lg hover:bg-white/5 transition-colors focus:outline-none" aria-label="Alternar Menu" aria-expanded="false">
+      <button type="button" id="mobileMenuBtn" class="md:hidden flex flex-col justify-center items-center w-11 h-11 rounded-lg hover:bg-white/5 transition-colors focus:outline-none" aria-label="Abrir menu" aria-controls="mobileMenu" aria-expanded="false">
         <span class="hamburger-bar w-6 h-[2px] bg-[#f4f5ef] rounded-full transition-all duration-300 origin-center my-[3px]"></span>
         <span class="hamburger-bar w-6 h-[2px] bg-[#f4f5ef] rounded-full transition-all duration-300 origin-center my-[3px]"></span>
         <span class="hamburger-bar w-6 h-[2px] bg-[#f4f5ef] rounded-full transition-all duration-300 origin-center my-[3px]"></span>
@@ -80,8 +80,9 @@
       <div class="header-divider absolute bottom-0 left-5 sm:left-10 lg:left-20 right-5 sm:right-10 lg:right-20 h-[1px] bg-[#323b2e]"></div>
     </div>
 
-    <!-- Menu Drawer Mobile -->
-    <div id="mobileMenu" class="mobile-drawer fixed inset-x-0 top-[80px] sm:top-[90px] bg-[#0e110e]/95 backdrop-blur-xl border-b border-[#323b2e] px-6 py-8 flex flex-col gap-5 md:hidden -translate-y-[120%] opacity-0 pointer-events-none transition-all duration-300 shadow-2xl z-40">
+    <!-- Backdrop e menu mobile -->
+    <button type="button" id="mobileMenuBackdrop" class="mobile-menu-backdrop fixed inset-x-0 top-[80px] sm:top-[90px] bottom-0 bg-black/55 backdrop-blur-[2px] opacity-0 pointer-events-none transition-opacity duration-300 md:hidden z-30" aria-label="Fechar menu" tabindex="-1" aria-hidden="true" inert></button>
+    <nav id="mobileMenu" class="mobile-drawer fixed inset-x-0 top-[80px] sm:top-[90px] bg-[#0e110e]/95 backdrop-blur-xl border-b border-[#323b2e] px-6 py-8 flex flex-col gap-5 md:hidden -translate-y-[120%] opacity-0 pointer-events-none transition-all duration-300 shadow-2xl z-40" aria-label="Navegação principal mobile" aria-hidden="true" inert>
       <a href="#solucoes" class="mobile-nav-link text-[18px] font-medium text-[#f4f5ef] hover:text-[#d5fc78] py-2 border-b border-[#1f281b]">Soluções</a>
       <a href="#projetos" class="mobile-nav-link text-[18px] font-medium text-[#f4f5ef] hover:text-[#d5fc78] py-2 border-b border-[#1f281b]">Projetos</a>
       <a href="#como-trabalhamos" class="mobile-nav-link text-[18px] font-medium text-[#f4f5ef] hover:text-[#d5fc78] py-2 border-b border-[#1f281b]">Como trabalhamos</a>
@@ -89,7 +90,7 @@
         <span>Vamos conversar</span>
         <span>↗</span>
       </button>
-    </div>
+    </nav>
   </header>
 
   <!-- ======================================================================
