@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Nexo — Tecnologia e experiências digitais</title>
+  <meta name="description" content="Criamos sites e sistemas que conectam sua empresa a novas possibilidades. Do primeiro insight à evolução contínua do seu produto.">
+  
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN for instant rendering -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            nexoBgDark: '#0e110e',
+            nexoSurfaceDark: '#1b211a',
+            nexoStripDark: '#171d15',
+            nexoBorderDark: '#323b2e',
+            nexoLime: '#d5fc78',
+            nexoLimeHover: '#c6f162',
+            nexoLight: '#f4f5ef',
+            nexoBorderLight: '#d9ded1',
+            nexoTextDark: '#182016',
+            nexoTextMutedDark: '#a7b09f',
+            nexoTextMutedLight: '#65705e',
+          },
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Dedicated Responsive Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-[#0e110e] text-[#f4f5ef] font-sans antialiased selection:bg-[#d5fc78] selection:text-[#182016] overflow-x-hidden min-h-screen">
+
+  <!-- ======================================================================
+       HEADER / NAVEGAÇÃO
+       ====================================================================== -->
+  <header class="site-header fixed top-0 left-0 w-full z-50 transition-all duration-300">
+    <div class="nav-container max-w-[1440px] mx-auto px-5 sm:px-10 lg:px-20 h-[80px] sm:h-[90px] lg:h-[100px] flex items-center justify-between relative">
+      <!-- Marca -->
+      <a href="#" class="brand-logo flex items-baseline select-none focus:outline-none" aria-label="Nexo Página Inicial">
+        <span class="font-bold text-[30px] sm:text-[34px] lg:text-[36px] tracking-tight text-[#f4f5ef]">nexo</span>
+        <span class="font-bold text-[30px] sm:text-[34px] lg:text-[36px] text-[#d5fc78] leading-none">.</span>
+      </a>
+
+      <!-- Menu Desktop -->
+      <nav class="hidden md:flex items-center gap-6 lg:gap-10 text-[14px] font-medium text-[#f4f5ef]">
+        <a href="#solucoes" class="nav-link hover:text-[#d5fc78] transition-colors py-2">Soluções</a>
+        <a href="#projetos" class="nav-link hover:text-[#d5fc78] transition-colors py-2">Projetos</a>
+        <a href="#como-trabalhamos" class="nav-link hover:text-[#d5fc78] transition-colors py-2">Como trabalhamos</a>
+      </nav>
+
+      <!-- CTA Desktop -->
+      <div class="hidden md:flex items-center">
+        <button type="button" class="btn-primary group flex items-center justify-center gap-2 bg-[#d5fc78] hover:bg-[#c6f162] text-[#182016] font-semibold text-[14px] px-5 lg:px-6 py-3 lg:py-3.5 rounded-[8px] transition-all transform active:scale-95 shadow-sm" onclick="openContactModal()">
+          <span>Vamos conversar</span>
+          <span class="text-[17px] transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
+        </button>
+      </div>
+
+      <!-- Botão Hamburger Mobile -->
+      <button type="button" id="mobileMenuBtn" class="md:hidden flex flex-col justify-center items-center w-11 h-11 rounded-lg hover:bg-white/5 transition-colors focus:outline-none" aria-label="Alternar Menu" aria-expanded="false">
+        <span class="hamburger-bar w-6 h-[2px] bg-[#f4f5ef] rounded-full transition-all duration-300 origin-center my-[3px]"></span>
+        <span class="hamburger-bar w-6 h-[2px] bg-[#f4f5ef] rounded-full transition-all duration-300 origin-center my-[3px]"></span>
+        <span class="hamburger-bar w-6 h-[2px] bg-[#f4f5ef] rounded-full transition-all duration-300 origin-center my-[3px]"></span>
+      </button>
+
+      <!-- Divisor inferior -->
+      <div class="header-divider absolute bottom-0 left-5 sm:left-10 lg:left-20 right-5 sm:right-10 lg:right-20 h-[1px] bg-[#323b2e]"></div>
+    </div>
+
+    <!-- Menu Drawer Mobile -->
+    <div id="mobileMenu" class="mobile-drawer fixed inset-x-0 top-[80px] sm:top-[90px] bg-[#0e110e]/95 backdrop-blur-xl border-b border-[#323b2e] px-6 py-8 flex flex-col gap-5 md:hidden -translate-y-[120%] opacity-0 pointer-events-none transition-all duration-300 shadow-2xl z-40">
+      <a href="#solucoes" class="mobile-nav-link text-[18px] font-medium text-[#f4f5ef] hover:text-[#d5fc78] py-2 border-b border-[#1f281b]">Soluções</a>
+      <a href="#projetos" class="mobile-nav-link text-[18px] font-medium text-[#f4f5ef] hover:text-[#d5fc78] py-2 border-b border-[#1f281b]">Projetos</a>
+      <a href="#como-trabalhamos" class="mobile-nav-link text-[18px] font-medium text-[#f4f5ef] hover:text-[#d5fc78] py-2 border-b border-[#1f281b]">Como trabalhamos</a>
+      <button type="button" class="btn-primary flex items-center justify-center gap-2 bg-[#d5fc78] hover:bg-[#c6f162] text-[#182016] font-semibold text-[15px] px-6 py-4 rounded-[8px] mt-2 shadow-md w-full" onclick="openContactModal()">
+        <span>Vamos conversar</span>
+        <span>↗</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ======================================================================
+       HERO SECTION
+       ====================================================================== -->
+  <section data-index-title="Início" class="hero-section relative pt-[110px] sm:pt-[130px] lg:pt-[160px] pb-14 sm:pb-20 lg:pb-24 overflow-hidden">
+    <div class="max-w-[1440px] mx-auto px-5 sm:px-10 lg:px-20">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-start">
+        
+        <!-- Coluna Esquerda: Textos e Chamada Principal -->
+        <div class="lg:col-span-7 flex flex-col items-start pt-1 sm:pt-2">
+          <!-- Tag / Posicionamento -->
+          <div class="inline-flex items-center gap-2 mb-4 sm:mb-6">
+            <span class="w-2 h-2 rounded-full bg-[#d5fc78] animate-pulse"></span>
+            <p class="text-[#d5fc78] font-semibold text-[11px] sm:text-[12px] uppercase tracking-[0.16em]">
+              ESTRATÉGIA, DESIGN E TECNOLOGIA
+            </p>
+          </div>
+
+          <!-- Título Principal Fluido -->
+          <h1 class="hero-title text-[#f4f5ef] font-medium leading-[1.05] tracking-[-0.03em] mb-6 sm:mb-8 text-balance">
+            O próximo nível<br>
+            do seu negócio<br>
+            é digital.
+          </h1>
+
+          <!-- Descrição -->
+          <p class="text-[#a7b09f] font-normal text-[15px] sm:text-[17px] lg:text-[18px] leading-[1.6] max-w-[620px] mb-8 sm:mb-10 text-balance">
+            Criamos sites e sistemas que conectam sua empresa a novas possibilidades. Do primeiro insight à evolução contínua do seu produto.
+          </p>
+
+          <!-- CTAs Responsivos -->
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-6 w-full sm:w-auto">
+            <button type="button" class="btn-primary group flex items-center justify-center gap-3 bg-[#d5fc78] hover:bg-[#c6f162] text-[#182016] font-semibold text-[14px] sm:text-[15px] px-7 py-4 rounded-[8px] transition-all transform active:scale-95 shadow-lg" onclick="openContactModal()">
+              <span>Tire sua ideia do papel</span>
+              <span class="text-[18px] transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
+            </button>
+
+            <a href="#solucoes" class="group flex items-center justify-center sm:justify-start gap-2 text-[#f4f5ef] hover:text-[#d5fc78] font-medium text-[14px] transition-colors py-3 sm:py-2">
+              <span>Explore nossas soluções</span>
+              <span class="transition-transform duration-200 group-hover:translate-y-1">↓</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Coluna Direita: Mockup da Interface do Sistema (100% responsivo) -->
+        <div class="lg:col-span-5 relative mt-6 lg:mt-0 flex justify-center w-full">
+          <div class="hero-mockup-card relative bg-[#1b211a] border border-[#323b2e] rounded-[16px] sm:rounded-[18px] p-4 sm:p-6 w-full max-w-[545px] shadow-2xl">
+            <!-- Header do Card -->
+            <div class="flex items-center justify-between mb-4 sm:mb-5">
+              <span class="text-[#a7b09f] font-semibold text-[10px] sm:text-[11px] tracking-[0.14em] uppercase">
+                DA IDEIA À EXPERIÊNCIA.
+              </span>
+              <span class="text-[#d5fc78] font-medium text-[9px] sm:text-[10px] tracking-wider uppercase bg-[#d5fc78]/10 border border-[#d5fc78]/20 px-2.5 py-0.5 rounded">
+                CONCEITO
+              </span>
+            </div>
+
+            <!-- Janela do Navegador Mockup -->
+            <div class="browser-window bg-[#f5f6f0] rounded-[10px] overflow-hidden shadow-inner border border-[#e2e5dc]">
+              <!-- Barra do Navegador -->
+              <div class="browser-bar bg-[#e8ebe2] h-[33px] px-3.5 flex items-center justify-between border-b border-[#dde0d7]">
+                <div class="flex items-center gap-1.5">
+                  <span class="w-[7px] h-[7px] rounded-full bg-[#f87171] inline-block"></span>
+                  <span class="w-[7px] h-[7px] rounded-full bg-[#fbbf24] inline-block"></span>
+                  <span class="w-[7px] h-[7px] rounded-full bg-[#34d399] inline-block"></span>
+                </div>
+                <div class="text-[#697562] font-medium text-[9px] tracking-wide truncate max-w-[180px] sm:max-w-none">
+                  workspace / visão geral
+                </div>
+                <div class="w-6"></div>
+              </div>
+
+              <!-- Conteúdo da Interface -->
+              <div class="flex flex-col sm:flex-row min-h-[300px] sm:min-h-[322px]">
+                <!-- Sidebar -->
+                <div class="sidebar bg-[#edefe7] w-full sm:w-[104px] p-3 sm:py-5 border-b sm:border-b-0 sm:border-r border-[#e2e5dc] flex sm:flex-col justify-between sm:justify-start gap-2 sm:gap-6">
+                  <div>
+                    <div class="font-bold text-[#182016] text-[18px] sm:text-[20px] tracking-tight mb-2 sm:mb-4">orbit.</div>
+                    <div class="flex sm:flex-col gap-1 overflow-x-auto sm:overflow-visible pb-1 sm:pb-0">
+                      <div class="bg-[#d7e4c7] text-[#182016] font-medium text-[8px] sm:text-[9px] px-2.5 py-1.5 rounded-[5px] whitespace-nowrap">
+                        Visão geral
+                      </div>
+                      <div class="text-[#75806d] font-medium text-[8px] sm:text-[9px] px-2.5 py-1.5 hover:text-[#182016] transition-colors whitespace-nowrap cursor-pointer">
+                        Projetos
+                      </div>
+                      <div class="text-[#75806d] font-medium text-[8px] sm:text-[9px] px-2.5 py-1.5 hover:text-[#182016] transition-colors whitespace-nowrap cursor-pointer">
+                        Clientes
+                      </div>
+                      <div class="text-[#75806d] font-medium text-[8px] sm:text-[9px] px-2.5 py-1.5 hover:text-[#182016] transition-colors whitespace-nowrap cursor-pointer">
+                        Relatórios
+                      </div>
+                    </div>
+                  </div>
+                  <div class="hidden sm:block text-[#75806d] font-normal text-[8px] px-2.5 pt-6">
+                    Ajuda e suporte
+                  </div>
+                </div>
+
+                <!-- Painel Principal do Mockup -->
+                <div class="main-panel flex-1 p-3.5 sm:p-5 flex flex-col gap-3.5 sm:gap-4">
+                  <!-- Título do Dashboard -->
+                  <div>
+                    <h3 class="font-semibold text-[#182016] text-[17px] sm:text-[22px] leading-tight">Tudo sob controle.</h3>
+                    <p class="text-[#74806b] font-normal text-[9px] sm:text-[10px] mt-0.5">Uma visão clara do seu negócio.</p>
+                  </div>
+
+                  <!-- 3 Indicadores -->
+                  <div class="grid grid-cols-3 gap-2">
+                    <div class="bg-white p-2 sm:p-2.5 rounded-[6px] border border-[#e8ece0] shadow-sm">
+                      <p class="text-[#6d7965] text-[7px] sm:text-[8px] font-normal mb-0.5 truncate">Receita do mês</p>
+                      <p class="text-[#182016] text-[12px] sm:text-[15px] font-semibold tracking-tight truncate">R$ 48.250</p>
+                    </div>
+                    <div class="bg-white p-2 sm:p-2.5 rounded-[6px] border border-[#e8ece0] shadow-sm">
+                      <p class="text-[#6d7965] text-[7px] sm:text-[8px] font-normal mb-0.5 truncate">Projetos ativos</p>
+                      <p class="text-[#182016] text-[12px] sm:text-[15px] font-semibold tracking-tight">24</p>
+                    </div>
+                    <div class="bg-white p-2 sm:p-2.5 rounded-[6px] border border-[#e8ece0] shadow-sm">
+                      <p class="text-[#6d7965] text-[7px] sm:text-[8px] font-normal mb-0.5 truncate">Novos clientes</p>
+                      <p class="text-[#182016] text-[12px] sm:text-[15px] font-semibold tracking-tight">18</p>
+                    </div>
+                  </div>
+
+                  <!-- Gráfico de Resultados -->
+                  <div class="bg-white p-2.5 sm:p-3 rounded-[6px] border border-[#e8ece0] shadow-sm flex flex-col justify-between">
+                    <div class="flex items-center justify-between mb-2">
+                      <span class="text-[#182016] font-semibold text-[9px] sm:text-[10px]">Crescimento de receita</span>
+                      <span class="text-[#75806d] font-normal text-[8px]">6 meses</span>
+                    </div>
+
+                    <!-- Linhas do gráfico e Barras Fluidas -->
+                    <div class="relative h-[75px] sm:h-[85px] flex items-end justify-between px-1 pt-3 gap-1">
+                      <div class="absolute inset-x-0 top-1/4 h-[1px] bg-[#eff1ea]"></div>
+                      <div class="absolute inset-x-0 top-2/4 h-[1px] bg-[#eff1ea]"></div>
+                      <div class="absolute inset-x-0 top-3/4 h-[1px] bg-[#eff1ea]"></div>
+
+                      <div class="z-10 flex-1 bg-[#c9d8b5] rounded-t-[2px] sm:rounded-t-[3px] transition-all hover:brightness-95" style="height: 25%;"></div>
+                      <div class="z-10 flex-1 bg-[#c9d8b5] rounded-t-[2px] sm:rounded-t-[3px] transition-all hover:brightness-95" style="height: 36%;"></div>
+                      <div class="z-10 flex-1 bg-[#c9d8b5] rounded-t-[2px] sm:rounded-t-[3px] transition-all hover:brightness-95" style="height: 31%;"></div>
+                      <div class="z-10 flex-1 bg-[#c9d8b5] rounded-t-[2px] sm:rounded-t-[3px] transition-all hover:brightness-95" style="height: 48%;"></div>
+                      <div class="z-10 flex-1 bg-[#c9d8b5] rounded-t-[2px] sm:rounded-t-[3px] transition-all hover:brightness-95" style="height: 54%;"></div>
+                      <div class="z-10 flex-1 bg-[#c9d8b5] rounded-t-[2px] sm:rounded-t-[3px] transition-all hover:brightness-95" style="height: 64%;"></div>
+                      <div class="z-10 flex-1 bg-[#c9d8b5] rounded-t-[2px] sm:rounded-t-[3px] transition-all hover:brightness-95" style="height: 60%;"></div>
+                      <div class="z-10 flex-1 bg-[#c9d8b5] rounded-t-[2px] sm:rounded-t-[3px] transition-all hover:brightness-95" style="height: 72%;"></div>
+                      <div class="z-10 flex-1 bg-[#c9d8b5] rounded-t-[2px] sm:rounded-t-[3px] transition-all hover:brightness-95" style="height: 78%;"></div>
+                      <div class="z-10 flex-1 bg-[#c9d8b5] rounded-t-[2px] sm:rounded-t-[3px] transition-all hover:brightness-95" style="height: 81%;"></div>
+                      <div class="z-10 flex-1 bg-[#c9d8b5] rounded-t-[2px] sm:rounded-t-[3px] transition-all hover:brightness-95" style="height: 89%;"></div>
+                      <div class="z-10 flex-1 bg-[#6a8b33] rounded-t-[2px] sm:rounded-t-[3px] transition-all hover:brightness-110 shadow-sm" style="height: 100%;"></div>
+                    </div>
+
+                    <!-- Eixo X -->
+                    <div class="flex justify-between text-[#87917e] font-medium text-[7px] mt-1.5 px-1">
+                      <span>JUN</span>
+                      <span>JUL</span>
+                      <span>AGO</span>
+                      <span>SET</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Floating Badge: Posicionado estrategicamente para desktop e fluido no mobile -->
+            <div class="floating-badge sm:absolute sm:-bottom-4 sm:-left-6 bg-[#d5fc78] text-[#182016] p-3.5 sm:p-4 rounded-[10px] shadow-xl border border-[#c2eb5f] mt-4 sm:mt-0 max-w-full sm:max-w-[270px]">
+              <p class="font-semibold text-[9px] tracking-wider uppercase mb-0.5 text-[#2c3d18]">PENSADO PARA EVOLUIR</p>
+              <p class="font-semibold text-[15px] sm:text-[16px] leading-tight">Seu negócio, sem limites.</p>
+            </div>
+
+            <!-- Legenda Inferior -->
+            <p class="text-[#a7b09f] font-normal text-[9px] mt-3 sm:mt-4 text-center sm:text-right">
+              Interface ilustrativa de um sistema sob medida.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero Bottom: 3 Pilares com Grid Responsivo -->
+      <div class="mt-12 sm:mt-20 lg:mt-24 pt-6 sm:pt-8 border-t border-[#323b2e]">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 text-[#a7b09f] font-medium text-[13px] sm:text-[14px] tracking-wide">
+          <div class="flex items-center gap-2.5 py-1">
+            <span class="text-[#d5fc78] font-semibold">01 /</span> Feito para o seu negócio
+          </div>
+          <div class="flex items-center gap-2.5 py-1">
+            <span class="text-[#d5fc78] font-semibold">02 /</span> Design que gera clareza
+          </div>
+          <div class="flex items-center gap-2.5 py-1">
+            <span class="text-[#d5fc78] font-semibold">03 /</span> Tecnologia para crescer
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       SEÇÃO: ESPECIALIDADES STRIP
+       ====================================================================== -->
+  <section data-index-title="Especialidades" class="especialidades-strip bg-[#171d15] py-7 sm:py-9 border-y border-[#263022]">
+    <div class="max-w-[1440px] mx-auto px-5 sm:px-10 lg:px-20">
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-5 sm:gap-6">
+        <!-- Tagline -->
+        <div class="text-[#a7b09f] font-semibold text-[11px] uppercase tracking-[0.14em] leading-[1.5]">
+          SOLUÇÕES CONECTADAS<br class="hidden sm:inline">AO SEU CRESCIMENTO
+        </div>
+        <!-- Tags com layout flex wrap responsivo -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-6 lg:gap-10 text-[#f4f5ef] font-medium text-[15px] sm:text-[17px] lg:text-[18px]">
+          <div class="flex items-center gap-2 hover:text-[#d5fc78] transition-colors cursor-default">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#d5fc78] shrink-0"></span>
+            <span class="truncate">Sites institucionais</span>
+          </div>
+          <div class="flex items-center gap-2 hover:text-[#d5fc78] transition-colors cursor-default">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#d5fc78] shrink-0"></span>
+            <span class="truncate">E-commerce</span>
+          </div>
+          <div class="flex items-center gap-2 hover:text-[#d5fc78] transition-colors cursor-default">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#d5fc78] shrink-0"></span>
+            <span class="truncate">Sistemas web</span>
+          </div>
+          <div class="flex items-center gap-2 hover:text-[#d5fc78] transition-colors cursor-default">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#d5fc78] shrink-0"></span>
+            <span class="truncate">Integrações</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       SEÇÃO: SERVIÇOS (LIGHT)
+       ====================================================================== -->
+  <section id="solucoes" data-index-title="01 / Soluções" class="bg-[#f4f5ef] text-[#182016] py-16 sm:py-24 lg:py-28">
+    <div class="max-w-[1440px] mx-auto px-5 sm:px-10 lg:px-20">
+      <!-- Header da Seção -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-end mb-12 sm:mb-16">
+        <div class="lg:col-span-8">
+          <p class="text-[#65705e] font-semibold text-[11px] uppercase tracking-[0.16em] mb-3 sm:mb-4">
+            01 / O QUE FAZEMOS
+          </p>
+          <h2 class="section-title text-[#182016] font-medium leading-[1.12] tracking-[-0.02em]">
+            Tecnologia com propósito.<br>
+            Soluções com impacto.
+          </h2>
+        </div>
+        <div class="lg:col-span-4">
+          <p class="text-[#65705e] font-normal text-[15px] sm:text-[16px] leading-[1.6]">
+            Cada negócio tem um desafio. A nossa especialidade é construir a solução certa para o seu.
+          </p>
+        </div>
+      </div>
+
+      <!-- 3 Cards de Serviços (Grid 1 col no mobile, 3 cols no desktop) -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+        <!-- Card 1 -->
+        <div class="service-card group bg-white rounded-[12px] p-6 sm:p-8 flex flex-col justify-between border border-[#e4e8dc] hover:border-[#182016] hover:shadow-xl transition-all duration-300">
+          <div>
+            <div class="flex items-center justify-between pb-5 sm:pb-6 border-b border-[#d9ded1]">
+              <span class="text-[#65705e] font-medium text-[14px]">01</span>
+              <span class="text-[#182016] text-[22px] sm:text-[24px] font-normal transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1">↗</span>
+            </div>
+            <h3 class="text-[#182016] font-medium text-[22px] sm:text-[26px] lg:text-[28px] leading-tight mt-5 sm:mt-6 mb-3 sm:mb-4">
+              Sites que posicionam.
+            </h3>
+            <p class="text-[#65705e] font-normal text-[14px] leading-[1.65] mb-6 sm:mb-8">
+              Sua presença digital com estratégia, personalidade e uma experiência que transforma visitas em conexões.
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-2 pt-2">
+            <span class="bg-[#edf0e6] text-[#65705e] font-medium text-[10px] px-3 py-1.5 rounded-[4px]">
+              Sites institucionais
+            </span>
+            <span class="bg-[#edf0e6] text-[#65705e] font-medium text-[10px] px-3 py-1.5 rounded-[4px]">
+              Landing pages
+            </span>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="service-card group bg-white rounded-[12px] p-6 sm:p-8 flex flex-col justify-between border border-[#e4e8dc] hover:border-[#182016] hover:shadow-xl transition-all duration-300">
+          <div>
+            <div class="flex items-center justify-between pb-5 sm:pb-6 border-b border-[#d9ded1]">
+              <span class="text-[#65705e] font-medium text-[14px]">02</span>
+              <span class="text-[#182016] text-[22px] sm:text-[24px] font-normal transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1">↗</span>
+            </div>
+            <h3 class="text-[#182016] font-medium text-[22px] sm:text-[26px] lg:text-[28px] leading-tight mt-5 sm:mt-6 mb-3 sm:mb-4">
+              Sistemas que simplificam.
+            </h3>
+            <p class="text-[#65705e] font-normal text-[14px] leading-[1.65] mb-6 sm:mb-8">
+              Menos tarefas manuais. Mais controle. Desenvolvemos plataformas sob medida para a sua operação evoluir.
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-2 pt-2">
+            <span class="bg-[#edf0e6] text-[#65705e] font-medium text-[10px] px-3 py-1.5 rounded-[4px]">
+              Sistemas web
+            </span>
+            <span class="bg-[#edf0e6] text-[#65705e] font-medium text-[10px] px-3 py-1.5 rounded-[4px]">
+              Plataformas SaaS
+            </span>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="service-card group bg-white rounded-[12px] p-6 sm:p-8 flex flex-col justify-between border border-[#e4e8dc] hover:border-[#182016] hover:shadow-xl transition-all duration-300">
+          <div>
+            <div class="flex items-center justify-between pb-5 sm:pb-6 border-b border-[#d9ded1]">
+              <span class="text-[#65705e] font-medium text-[14px]">03</span>
+              <span class="text-[#182016] text-[22px] sm:text-[24px] font-normal transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1">↗</span>
+            </div>
+            <h3 class="text-[#182016] font-medium text-[22px] sm:text-[26px] lg:text-[28px] leading-tight mt-5 sm:mt-6 mb-3 sm:mb-4">
+              Conexões que aceleram.
+            </h3>
+            <p class="text-[#65705e] font-normal text-[14px] leading-[1.65] mb-6 sm:mb-8">
+              Integramos ferramentas e automatizamos processos para sua equipe ganhar tempo e focar no que realmente importa.
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-2 pt-2">
+            <span class="bg-[#edf0e6] text-[#65705e] font-medium text-[10px] px-3 py-1.5 rounded-[4px]">
+              Integrações
+            </span>
+            <span class="bg-[#edf0e6] text-[#65705e] font-medium text-[10px] px-3 py-1.5 rounded-[4px]">
+              Automação
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       SEÇÃO: PROJETOS CONCEITUAIS (LIGHT)
+       ====================================================================== -->
+  <section id="projetos" data-index-title="02 / Projetos" class="bg-[#f4f5ef] text-[#182016] pb-16 sm:pb-24 border-t border-[#d9ded1]">
+    <div class="max-w-[1440px] mx-auto px-5 sm:px-10 lg:px-20 pt-14 sm:pt-20">
+      <!-- Header da Seção -->
+      <div class="mb-10 sm:mb-12">
+        <p class="text-[#65705e] font-semibold text-[11px] uppercase tracking-[0.16em] mb-2 sm:mb-3">
+          02 / POSSIBILIDADES NA PRÁTICA
+        </p>
+        <h2 class="section-title text-[#182016] font-medium leading-tight tracking-[-0.02em] mb-2">
+          Ideias que ganham forma.
+        </h2>
+        <p class="text-[#65705e] font-medium text-[10px] tracking-wider uppercase">
+          EXPLORAÇÕES CONCEITUAIS · NÃO SÃO CASES DE CLIENTES
+        </p>
+      </div>
+
+      <!-- Grid de Projetos Conceituais -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
+        
+        <!-- Projeto 1: Flow Gestão Financeira -->
+        <div id="projectFlow" class="project-item group">
+          <div class="bg-[#dde3d3] rounded-[14px] p-4 sm:p-8 lg:p-10 flex items-center justify-center overflow-hidden transition-all duration-300 group-hover:shadow-xl">
+            <div class="bg-[#172419] text-[#f2f6ed] rounded-[10px] p-4 sm:p-6 w-full max-w-[544px] shadow-2xl border border-[#2b3a2a]">
+              <!-- Header Flow -->
+              <div class="flex items-center justify-between pb-3 sm:pb-4 border-b border-[#34452e]">
+                <span class="text-[#e4f7d1] font-semibold text-[20px] sm:text-[22px] tracking-tight">flow</span>
+                <div class="hidden sm:flex items-center gap-4 text-[#adbda6] font-medium text-[9px]">
+                  <span>Visão geral</span>
+                  <span>Transações</span>
+                  <span>Relatórios</span>
+                </div>
+              </div>
+
+              <!-- Top Content Flow -->
+              <div class="flex items-start justify-between mt-4 sm:mt-5 mb-5 sm:mb-6">
+                <div>
+                  <h4 class="font-medium text-[19px] sm:text-[24px] lg:text-[26px] leading-tight">
+                    Seu financeiro,<br>em um só lugar.
+                  </h4>
+                </div>
+                <button type="button" class="bg-[#c8f58a] hover:bg-[#bbf075] text-[#182016] font-semibold text-[9px] px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-[5px] transition-colors whitespace-nowrap">
+                  + Novo lançamento
+                </button>
+              </div>
+
+              <!-- Saldo e Etiqueta -->
+              <div class="flex items-end justify-between mb-4">
+                <div>
+                  <p class="text-[#a8b8a1] text-[9px] sm:text-[10px] mb-0.5">Saldo disponível</p>
+                  <p class="text-[#f2f6ed] font-medium text-[24px] sm:text-[32px] lg:text-[34px] leading-none tracking-tight">R$ 124.680,00</p>
+                </div>
+                <span class="text-[#a8b8a1] text-[8px] font-normal uppercase tracking-wider">
+                  DADOS ILUSTRATIVOS
+                </span>
+              </div>
+
+              <!-- Mini Gráfico Flow (Fluido em todas as telas) -->
+              <div class="bg-[#21331f] rounded-[8px] p-3 sm:p-3.5 flex items-end justify-between gap-1 sm:gap-1.5 h-[70px] sm:h-[80px]">
+                <div class="flex-1 bg-[#607b4d] rounded-[2px]" style="height: 32%;"></div>
+                <div class="flex-1 bg-[#607b4d] rounded-[2px]" style="height: 42%;"></div>
+                <div class="flex-1 bg-[#607b4d] rounded-[2px]" style="height: 35%;"></div>
+                <div class="flex-1 bg-[#607b4d] rounded-[2px]" style="height: 50%;"></div>
+                <div class="flex-1 bg-[#607b4d] rounded-[2px]" style="height: 47%;"></div>
+                <div class="flex-1 bg-[#607b4d] rounded-[2px]" style="height: 58%;"></div>
+                <div class="flex-1 bg-[#607b4d] rounded-[2px]" style="height: 53%;"></div>
+                <div class="flex-1 bg-[#607b4d] rounded-[2px]" style="height: 69%;"></div>
+                <div class="flex-1 bg-[#607b4d] rounded-[2px]" style="height: 65%;"></div>
+                <div class="flex-1 bg-[#607b4d] rounded-[2px]" style="height: 76%;"></div>
+                <div class="flex-1 bg-[#607b4d] rounded-[2px]" style="height: 72%;"></div>
+                <div class="flex-1 bg-[#607b4d] rounded-[2px]" style="height: 85%;"></div>
+                <div class="flex-1 bg-[#607b4d] rounded-[2px]" style="height: 80%;"></div>
+                <div class="flex-1 bg-[#607b4d] rounded-[2px]" style="height: 89%;"></div>
+                <div class="flex-1 bg-[#607b4d] rounded-[2px]" style="height: 95%;"></div>
+                <div class="flex-1 bg-[#607b4d] rounded-[2px]" style="height: 89%;"></div>
+                <div class="flex-1 bg-[#c8f58a] rounded-[2px]" style="height: 100%;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Legenda do Projeto -->
+          <div class="mt-4 flex items-center justify-between">
+            <div>
+              <h3 class="text-[#182016] font-medium text-[19px] sm:text-[22px] lg:text-[24px]">Flow — Gestão financeira</h3>
+              <p class="text-[#65705e] font-medium text-[10px] tracking-wider uppercase mt-0.5">SISTEMA WEB · UX/UI</p>
+            </div>
+            <span class="text-[#182016] text-[22px] sm:text-[24px] transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1">↗</span>
+          </div>
+        </div>
+
+        <!-- Projeto 2: Forma Arquitetura -->
+        <div id="projectForma" class="project-item group">
+          <div class="bg-[#dad7cc] rounded-[14px] p-4 sm:p-8 lg:p-10 flex items-center justify-center overflow-hidden transition-all duration-300 group-hover:shadow-xl">
+            <div class="bg-[#f8f5ec] text-[#413e33] rounded-[4px] p-4 sm:p-6 w-full max-w-[548px] shadow-2xl border border-[#ded9cc]">
+              <!-- Header Forma -->
+              <div class="flex items-center justify-between pb-3 border-b border-[#ded9cc]">
+                <span class="font-semibold text-[13px] sm:text-[14px] tracking-widest text-[#413e33]">FORMA</span>
+                <div class="hidden sm:flex items-center gap-3 text-[#5f5c50] font-medium text-[8px]">
+                  <span>Estúdio</span>
+                  <span>Projetos</span>
+                  <span>Contato</span>
+                </div>
+              </div>
+
+              <!-- Layout Editorial Responsivo -->
+              <div class="grid grid-cols-1 sm:grid-cols-12 gap-4 sm:gap-5 mt-4 items-center">
+                <div class="sm:col-span-7">
+                  <h4 class="font-medium text-[24px] sm:text-[32px] lg:text-[36px] leading-[1.08] mb-3 sm:mb-4 text-[#413e33]">
+                    Espaços para<br>viver o novo.
+                  </h4>
+                  <p class="text-[#706b60] text-[10px] leading-relaxed mb-5 max-w-[240px]">
+                    Arquitetura que conecta pessoas, matéria e novas possibilidades.
+                  </p>
+                  <button type="button" class="bg-[#413e33] text-[#f8f5ec] font-medium text-[9px] px-3.5 py-2 rounded-[2px] transition-opacity hover:opacity-90 inline-flex items-center gap-1.5">
+                    <span>Conheça o estúdio</span>
+                    <span>↗</span>
+                  </button>
+                </div>
+
+                <!-- Ilustração Arquitetônica -->
+                <div class="sm:col-span-5 flex justify-center py-2">
+                  <div class="relative w-[130px] sm:w-[150px] h-[170px] sm:h-[200px] bg-[#b4b29b] rounded-[2px] overflow-hidden shadow-inner">
+                    <div class="absolute inset-y-0 left-[28px] right-0 bg-[#d4cebb]"></div>
+                    <div class="absolute inset-y-0 left-0 w-[28px] bg-[#7c816d]"></div>
+                    <div class="absolute top-[30px] left-[50px] w-[65px] h-[105px] bg-[#555e50]">
+                      <div class="absolute inset-1 bg-[#dde0cd]"></div>
+                    </div>
+                    <div class="absolute bottom-[30px] left-[18px] w-[95px] h-[12px] bg-[#8c8d74]"></div>
+                    <div class="absolute bottom-[0px] left-[26px] w-[7px] h-[30px] bg-[#8c8d74]"></div>
+                    <div class="absolute bottom-[0px] left-[100px] w-[7px] h-[30px] bg-[#8c8d74]"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-4 pt-3 border-t border-[#ded9cc] text-[#706b60] font-medium text-[8px] tracking-wider">
+                DESIGN ESSENCIAL. EXPERIÊNCIAS REAIS.
+              </div>
+            </div>
+          </div>
+
+          <!-- Legenda do Projeto -->
+          <div class="mt-4 flex items-center justify-between">
+            <div>
+              <h3 class="text-[#182016] font-medium text-[19px] sm:text-[22px] lg:text-[24px]">Forma — Arquitetura & design</h3>
+              <p class="text-[#65705e] font-medium text-[10px] tracking-wider uppercase mt-0.5">SITE INSTITUCIONAL · EXPERIÊNCIA DIGITAL</p>
+            </div>
+            <span class="text-[#182016] text-[22px] sm:text-[24px] transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1">↗</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Resumo inferior -->
+      <div class="mt-10 sm:mt-14 pt-6 sm:pt-8 border-t border-[#d9ded1]">
+        <p class="text-[#65705e] font-normal text-[14px] sm:text-[16px]">
+          Diferentes desafios. A mesma atenção a cada detalhe.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       SEÇÃO: PROCESSO (DARK)
+       ====================================================================== -->
+  <section id="como-trabalhamos" data-index-title="03 / Processo" class="bg-[#0e110e] text-[#f4f5ef] py-16 sm:py-24 lg:py-28">
+    <div class="max-w-[1440px] mx-auto px-5 sm:px-10 lg:px-20">
+      <!-- Header da Seção -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-end mb-12 sm:mb-16 lg:mb-20">
+        <div class="lg:col-span-8">
+          <p class="text-[#d5fc78] font-semibold text-[11px] uppercase tracking-[0.16em] mb-3 sm:mb-4">
+            03 / DO PRIMEIRO PAPO À PRÓXIMA VERSÃO
+          </p>
+          <h2 class="section-title text-[#f4f5ef] font-medium leading-tight tracking-[-0.02em]">
+            Clareza em cada etapa.
+          </h2>
+        </div>
+        <div class="lg:col-span-4">
+          <p class="text-[#a7b09f] font-normal text-[15px] sm:text-[16px]">
+            Você acompanha. A gente constrói junto.
+          </p>
+        </div>
+      </div>
+
+      <!-- Timeline Steps (1 col no mobile, 2 cols em tablet, 4 cols no desktop) -->
+      <div class="relative">
+        <div class="hidden lg:block absolute top-[18px] left-[18px] right-[18px] h-[1px] bg-[#323b2e] z-0"></div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-8 relative z-10">
+          <!-- Etapa 01 -->
+          <div class="step-card flex flex-col items-start bg-[#141a14] sm:bg-transparent p-5 sm:p-0 rounded-[12px] sm:rounded-none border border-[#232c21] sm:border-0">
+            <div class="w-[36px] h-[36px] rounded-full bg-[#d5fc78] text-[#182016] font-semibold text-[12px] flex items-center justify-center mb-5 sm:mb-6 shadow-sm">
+              01
+            </div>
+            <h3 class="text-[#f4f5ef] font-medium text-[19px] sm:text-[21px] mb-2 sm:mb-3">Imersão</h3>
+            <p class="text-[#a7b09f] font-normal text-[14px] leading-[1.6]">
+              Entendemos seu negócio, seus objetivos e o que precisa mudar.
+            </p>
+          </div>
+
+          <!-- Etapa 02 -->
+          <div class="step-card flex flex-col items-start bg-[#141a14] sm:bg-transparent p-5 sm:p-0 rounded-[12px] sm:rounded-none border border-[#232c21] sm:border-0">
+            <div class="w-[36px] h-[36px] rounded-full bg-[#d5fc78] text-[#182016] font-semibold text-[12px] flex items-center justify-center mb-5 sm:mb-6 shadow-sm">
+              02
+            </div>
+            <h3 class="text-[#f4f5ef] font-medium text-[19px] sm:text-[21px] mb-2 sm:mb-3">Estratégia e design</h3>
+            <p class="text-[#a7b09f] font-normal text-[14px] leading-[1.6]">
+              Transformamos desafios em uma experiência clara e intuitiva.
+            </p>
+          </div>
+
+          <!-- Etapa 03 -->
+          <div class="step-card flex flex-col items-start bg-[#141a14] sm:bg-transparent p-5 sm:p-0 rounded-[12px] sm:rounded-none border border-[#232c21] sm:border-0">
+            <div class="w-[36px] h-[36px] rounded-full bg-[#d5fc78] text-[#182016] font-semibold text-[12px] flex items-center justify-center mb-5 sm:mb-6 shadow-sm">
+              03
+            </div>
+            <h3 class="text-[#f4f5ef] font-medium text-[19px] sm:text-[21px] mb-2 sm:mb-3">Desenvolvimento</h3>
+            <p class="text-[#a7b09f] font-normal text-[14px] leading-[1.6]">
+              Construímos com atenção à performance e à qualidade.
+            </p>
+          </div>
+
+          <!-- Etapa 04 -->
+          <div class="step-card flex flex-col items-start bg-[#141a14] sm:bg-transparent p-5 sm:p-0 rounded-[12px] sm:rounded-none border border-[#232c21] sm:border-0">
+            <div class="w-[36px] h-[36px] rounded-full bg-[#d5fc78] text-[#182016] font-semibold text-[12px] flex items-center justify-center mb-5 sm:mb-6 shadow-sm">
+              04
+            </div>
+            <h3 class="text-[#f4f5ef] font-medium text-[19px] sm:text-[21px] mb-2 sm:mb-3">Lançamento e evolução</h3>
+            <p class="text-[#a7b09f] font-normal text-[14px] leading-[1.6]">
+              Colocamos no ar e planejamos os próximos passos com você.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       SEÇÃO: DIFERENCIAIS (LIME GREEN)
+       ====================================================================== -->
+  <section id="diferenciais" data-index-title="04 / Diferenciais" class="bg-[#d5fc78] text-[#182016] py-16 sm:py-24 lg:py-28">
+    <div class="max-w-[1440px] mx-auto px-5 sm:px-10 lg:px-20">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
+        
+        <!-- Esquerda: Título Impactante Fluido -->
+        <div class="lg:col-span-7">
+          <p class="text-[#182016] font-semibold text-[11px] uppercase tracking-[0.16em] mb-3 sm:mb-4">
+            04 / NOSSO JEITO DE FAZER
+          </p>
+          <h2 class="section-title text-[#182016] font-medium leading-[1.12] tracking-[-0.02em] text-balance">
+            Não é só sobre<br>
+            tecnologia.<br>
+            É sobre o seu futuro.
+          </h2>
+        </div>
+
+        <!-- Direita: Lista de Diferenciais -->
+        <div class="lg:col-span-5 flex flex-col divide-y divide-[#b4d465]">
+          <div class="pb-6 first:pt-0">
+            <h3 class="text-[#182016] font-semibold text-[18px] sm:text-[20px] mb-1.5 sm:mb-2">
+              Estratégia antes da solução
+            </h3>
+            <p class="text-[#3e512b] font-normal text-[13px] sm:text-[14px] leading-relaxed">
+              Cada decisão começa com o que faz sentido para você.
+            </p>
+          </div>
+
+          <div class="py-6">
+            <h3 class="text-[#182016] font-semibold text-[18px] sm:text-[20px] mb-1.5 sm:mb-2">
+              Proximidade de verdade
+            </h3>
+            <p class="text-[#3e512b] font-normal text-[13px] sm:text-[14px] leading-relaxed">
+              Comunicação direta, decisões alinhadas e um processo claro.
+            </p>
+          </div>
+
+          <div class="pt-6">
+            <h3 class="text-[#182016] font-semibold text-[18px] sm:text-[20px] mb-1.5 sm:mb-2">
+              Qualidade que permanece
+            </h3>
+            <p class="text-[#3e512b] font-normal text-[13px] sm:text-[14px] leading-relaxed">
+              Experiências bem construídas, preparadas para evoluir.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       SEÇÃO: PERGUNTAS FREQUENTES (LIGHT)
+       ====================================================================== -->
+  <section id="faq" data-index-title="05 / FAQ" class="bg-[#f4f5ef] text-[#182016] py-16 sm:py-24 lg:py-28">
+    <div class="max-w-[1440px] mx-auto px-5 sm:px-10 lg:px-20">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
+        
+        <!-- Esquerda: Título FAQ -->
+        <div class="lg:col-span-5">
+          <p class="text-[#65705e] font-semibold text-[11px] uppercase tracking-[0.16em] mb-3 sm:mb-4">
+            05 / SEM PONTAS SOLTAS
+          </p>
+          <h2 class="section-title text-[#182016] font-medium leading-[1.12] tracking-[-0.02em] mb-4 sm:mb-6">
+            Antes de<br>começarmos.
+          </h2>
+          <p class="text-[#65705e] font-normal text-[15px] sm:text-[16px] leading-[1.6] max-w-[400px]">
+            Algumas respostas para dar o primeiro passo com confiança.
+          </p>
+        </div>
+
+        <!-- Direita: Accordion Interativo e Acessível -->
+        <div class="lg:col-span-7 divide-y divide-[#d9ded1] border-t border-b border-[#d9ded1]" id="faqAccordion">
+          
+          <!-- FAQ 1 (Aberto por padrão) -->
+          <div class="faq-item py-5 sm:py-6">
+            <button type="button" class="faq-question w-full flex items-center justify-between text-left group focus:outline-none" aria-expanded="true">
+              <span class="text-[#182016] font-medium text-[15px] sm:text-[17px] pr-4 group-hover:text-black transition-colors">
+                Quanto custa desenvolver um projeto?
+              </span>
+              <span class="faq-icon text-[20px] sm:text-[22px] font-normal text-[#182016] shrink-0 transition-transform duration-200">−</span>
+            </button>
+            <div class="faq-answer mt-3 sm:mt-4 text-[#65705e] font-normal text-[14px] leading-[1.7] block">
+              Cada projeto tem um escopo. Depois de entender seus objetivos, preparamos uma proposta com entregas, prazo e investimento.
+            </div>
+          </div>
+
+          <!-- FAQ 2 -->
+          <div class="faq-item py-5 sm:py-6">
+            <button type="button" class="faq-question w-full flex items-center justify-between text-left group focus:outline-none" aria-expanded="false">
+              <span class="text-[#182016] font-medium text-[15px] sm:text-[17px] pr-4 group-hover:text-black transition-colors">
+                Qual é o prazo para o meu site ou sistema?
+              </span>
+              <span class="faq-icon text-[20px] sm:text-[22px] font-normal text-[#182016] shrink-0 transition-transform duration-200">＋</span>
+            </button>
+            <div class="faq-answer mt-3 sm:mt-4 text-[#65705e] font-normal text-[14px] leading-[1.7] hidden">
+              Os prazos variam de acordo com a complexidade do projeto. Landing pages e sites institucionais costumam levar de 2 a 4 semanas, enquanto sistemas web e plataformas completas variam de 6 a 12 semanas.
+            </div>
+          </div>
+
+          <!-- FAQ 3 -->
+          <div class="faq-item py-5 sm:py-6">
+            <button type="button" class="faq-question w-full flex items-center justify-between text-left group focus:outline-none" aria-expanded="false">
+              <span class="text-[#182016] font-medium text-[15px] sm:text-[17px] pr-4 group-hover:text-black transition-colors">
+                Vocês cuidam do design e do desenvolvimento?
+              </span>
+              <span class="faq-icon text-[20px] sm:text-[22px] font-normal text-[#182016] shrink-0 transition-transform duration-200">＋</span>
+            </button>
+            <div class="faq-answer mt-3 sm:mt-4 text-[#65705e] font-normal text-[14px] leading-[1.7] hidden">
+              Sim! Cuidamos de todo o ciclo: da estratégia de negócio e arquitetura de informação até o design de interface (UI/UX) e desenvolvimento completo com código limpo e escalável.
+            </div>
+          </div>
+
+          <!-- FAQ 4 -->
+          <div class="faq-item py-5 sm:py-6">
+            <button type="button" class="faq-question w-full flex items-center justify-between text-left group focus:outline-none" aria-expanded="false">
+              <span class="text-[#182016] font-medium text-[15px] sm:text-[17px] pr-4 group-hover:text-black transition-colors">
+                E depois do lançamento?
+              </span>
+              <span class="faq-icon text-[20px] sm:text-[22px] font-normal text-[#182016] shrink-0 transition-transform duration-200">＋</span>
+            </button>
+            <div class="faq-answer mt-3 sm:mt-4 text-[#65705e] font-normal text-[14px] leading-[1.7] hidden">
+              Oferecemos suporte contínuo, manutenção e planos de evolução para acompanhar o crescimento do seu negócio e garantir alta disponibilidade e melhorias constantes.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       SEÇÃO: CONTATO (DARK CTA)
+       ====================================================================== -->
+  <section id="contato" data-index-title="Contato" class="bg-[#0e110e] text-[#f4f5ef] py-16 sm:py-24 lg:py-28">
+    <div class="max-w-[1440px] mx-auto px-5 sm:px-10 lg:px-20">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-end pb-14 sm:pb-20 border-b border-[#323b2e]">
+        
+        <!-- Chamada Principal Fluida -->
+        <div class="lg:col-span-8">
+          <p class="text-[#d5fc78] font-semibold text-[11px] uppercase tracking-[0.16em] mb-4 sm:mb-5">
+            SEU PRÓXIMO CAPÍTULO COMEÇA AQUI
+          </p>
+          <h2 class="contact-title text-[#f4f5ef] font-medium leading-[1.08] tracking-[-0.03em] mb-5 sm:mb-6 text-balance">
+            Grandes ideias merecem<br>sair do papel.
+          </h2>
+          <p class="text-[#a7b09f] font-normal text-[15px] sm:text-[17px] leading-[1.6] max-w-[640px]">
+            Conte o que você tem em mente. Vamos encontrar o melhor caminho para transformar sua ideia em realidade.
+          </p>
+        </div>
+
+        <!-- Botão CTA -->
+        <div class="lg:col-span-4 flex justify-start lg:justify-end w-full sm:w-auto">
+          <button type="button" class="btn-primary group flex items-center justify-between sm:justify-center gap-4 bg-[#d5fc78] hover:bg-[#c6f162] text-[#182016] font-semibold text-[15px] px-6 sm:px-8 py-4 sm:py-5 rounded-[8px] transition-all transform active:scale-95 shadow-xl w-full sm:w-auto" onclick="openContactModal()">
+            <span>Vamos falar sobre seu projeto</span>
+            <span class="text-[20px] sm:text-[22px] transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1">↗</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================================
+       RODAPÉ
+       ====================================================================== -->
+  <footer class="bg-[#0e110e] text-[#a7b09f] py-8 sm:py-10">
+    <div class="max-w-[1440px] mx-auto px-5 sm:px-10 lg:px-20 flex flex-col md:flex-row items-center justify-between gap-5 sm:gap-6 text-center md:text-left">
+      <!-- Marca -->
+      <a href="#" class="brand-logo flex items-baseline select-none">
+        <span class="font-bold text-[28px] sm:text-[32px] tracking-tight text-[#f4f5ef]">nexo</span>
+        <span class="font-bold text-[28px] sm:text-[32px] text-[#d5fc78] leading-none">.</span>
+      </a>
+
+      <!-- Assinatura Central -->
+      <p class="text-[12px] sm:text-[13px] font-normal text-[#a7b09f]">
+        Tecnologia que aproxima. Soluções que transformam.
+      </p>
+
+      <!-- Fechamento Direita -->
+      <p class="text-[9px] sm:text-[10px] font-medium tracking-[0.14em] uppercase text-[#a7b09f]">
+        ESTRATÉGIA → EXPERIÊNCIA → EVOLUÇÃO
+      </p>
+    </div>
+  </footer>
+
+  <!-- ======================================================================
+       MODAL DE CONTATO (100% RESPONSIVO)
+       ====================================================================== -->
+  <div id="contactModal" class="contact-modal fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
+    <div class="modal-dialog bg-[#1b211a] border border-[#323b2e] rounded-[16px] sm:rounded-[18px] p-5 sm:p-8 max-w-[480px] w-full shadow-2xl relative max-h-[92vh] overflow-y-auto">
+      <!-- Fechar Modal -->
+      <button type="button" onclick="closeContactModal()" class="absolute top-4 sm:top-5 right-4 sm:right-5 text-[#a7b09f] hover:text-[#f4f5ef] text-[20px] w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/5 transition-colors focus:outline-none" aria-label="Fechar janela">
+        ✕
+      </button>
+
+      <!-- Cabeçalho Modal -->
+      <div class="mb-5 sm:mb-6 pr-6">
+        <span class="text-[#d5fc78] font-semibold text-[10px] sm:text-[11px] tracking-widest uppercase">VAMOS CONVERSAR</span>
+        <h3 class="text-[#f4f5ef] font-medium text-[22px] sm:text-[24px] mt-1 leading-tight">Fale sobre seu projeto</h3>
+        <p class="text-[#a7b09f] text-[12px] sm:text-[13px] mt-1">Preencha os campos abaixo e entraremos em contato rapidamente.</p>
+      </div>
+
+      <!-- Formulário -->
+      <form id="contactForm" onsubmit="handleFormSubmit(event)" class="flex flex-col gap-3.5 sm:gap-4">
+        <div>
+          <label class="block text-[#a7b09f] text-[12px] font-medium mb-1.5" for="name">Seu nome ou empresa</label>
+          <input type="text" id="name" required placeholder="Ex.: Lucas Mendes" class="w-full bg-[#121612] border border-[#323b2e] rounded-[8px] px-3.5 py-2.5 text-[#f4f5ef] text-[14px] placeholder-[#5a6452] focus:outline-none focus:border-[#d5fc78] transition-colors">
+        </div>
+        <div>
+          <label class="block text-[#a7b09f] text-[12px] font-medium mb-1.5" for="email">E-mail ou WhatsApp</label>
+          <input type="text" id="email" required placeholder="lucas@exemplo.com ou (11) 99999-9999" class="w-full bg-[#121612] border border-[#323b2e] rounded-[8px] px-3.5 py-2.5 text-[#f4f5ef] text-[14px] placeholder-[#5a6452] focus:outline-none focus:border-[#d5fc78] transition-colors">
+        </div>
+        <div>
+          <label class="block text-[#a7b09f] text-[12px] font-medium mb-1.5" for="interest">O que você precisa?</label>
+          <select id="interest" class="w-full bg-[#121612] border border-[#323b2e] rounded-[8px] px-3.5 py-2.5 text-[#f4f5ef] text-[14px] focus:outline-none focus:border-[#d5fc78] transition-colors">
+            <option value="site">Site Institucional / Landing Page</option>
+            <option value="sistema">Sistema Web / Plataforma SaaS</option>
+            <option value="integracao">Integração ou Automação</option>
+            <option value="outro">Outro desafio digital</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-[#a7b09f] text-[12px] font-medium mb-1.5" for="message">Conte um pouco sobre o projeto</label>
+          <textarea id="message" rows="3" placeholder="Qual é o seu objetivo principal?" class="w-full bg-[#121612] border border-[#323b2e] rounded-[8px] px-3.5 py-2.5 text-[#f4f5ef] text-[14px] placeholder-[#5a6452] focus:outline-none focus:border-[#d5fc78] transition-colors resize-none"></textarea>
+        </div>
+
+        <button type="submit" class="btn-primary w-full bg-[#d5fc78] hover:bg-[#c6f162] text-[#182016] font-semibold text-[14px] py-3 rounded-[8px] transition-all transform active:scale-95 shadow-md mt-2 flex items-center justify-center gap-2">
+          <span>Enviar mensagem</span>
+          <span>↗</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="components/kokonutui/topo-background.js"></script>
+  <script src="components/kokonutui/scroll-index.js"></script>
+  <script src="components/magicui/pointer.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Magic UI — Pointer Demo</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+  </style>
+</head>
+<body class="bg-[#0e110e] text-[#f4f5ef] min-h-screen py-16 px-6 relative selection:bg-[#d5fc78] selection:text-[#182016]">
+
+  <!-- Header -->
+  <header class="max-w-3xl mx-auto mb-16 text-center">
+    <div class="inline-flex items-center gap-2 bg-[#d5fc78]/10 border border-[#d5fc78]/30 px-3.5 py-1 rounded-full text-[#d5fc78] text-[12px] font-semibold tracking-wider uppercase mb-5">
+      <span class="w-2 h-2 rounded-full bg-[#d5fc78] animate-pulse"></span>
+      Magic UI · Pointer Component
+    </div>
+
+    <h1 class="text-3xl sm:text-5xl font-medium tracking-tight text-[#f4f5ef] mb-4">
+      Custom Animated Pointer
+    </h1>
+
+    <p class="text-base text-[#a7b09f] max-w-xl mx-auto leading-relaxed mb-8">
+      Passe o cursor sobre os cards abaixo para experimentar o cursor animado personalizado inspirado no multiplayer do Figma e no componente Pointer da Magic UI.
+    </p>
+
+    <div class="flex items-center justify-center gap-4">
+      <a href="index.html" class="inline-flex items-center gap-2 bg-[#d5fc78] hover:bg-[#c6f162] text-[#182016] font-semibold text-xs px-5 py-2.5 rounded-lg shadow-md transition-all">
+        <span>← Voltar para a Landing Page</span>
+      </a>
+      <a href="topo-demo.html" class="text-xs text-[#a7b09f] hover:text-[#d5fc78] transition-colors">
+        Topo Background Demo →
+      </a>
+    </div>
+  </header>
+
+  <!-- Grid de Cards Interativos com Ponteiros Personalizados -->
+  <main class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 pb-20">
+    
+    <!-- Card 1: Estilo Figma Multiplayer -->
+    <div id="pointerCard1" class="relative bg-[#1b211a] border border-[#323b2e] rounded-2xl p-8 hover:border-[#d5fc78]/50 transition-colors shadow-xl group">
+      <div class="w-10 h-10 rounded-xl bg-[#d5fc78]/10 border border-[#d5fc78]/20 flex items-center justify-center text-[#d5fc78] mb-5 font-bold">
+        01
+      </div>
+      <h3 class="text-xl font-medium text-[#f4f5ef] mb-2">Figma Multiplayer Style</h3>
+      <p class="text-sm text-[#a7b09f] leading-relaxed mb-6">
+        Exibe uma etiqueta flutuante com nome do usuário e cor personalizada, ideal para colaboração e dashboards.
+      </p>
+      <div class="text-xs text-[#d5fc78] font-mono">Passe o mouse neste card ↗</div>
+    </div>
+
+    <!-- Card 2: Estilo Ação Interativa (Ver Projeto) -->
+    <div id="pointerCard2" class="relative bg-[#1b211a] border border-[#323b2e] rounded-2xl p-8 hover:border-[#38bdf8]/50 transition-colors shadow-xl group">
+      <div class="w-10 h-10 rounded-xl bg-[#38bdf8]/10 border border-[#38bdf8]/20 flex items-center justify-center text-[#38bdf8] mb-5 font-bold">
+        02
+      </div>
+      <h3 class="text-xl font-medium text-[#f4f5ef] mb-2">Action Badge Cursor</h3>
+      <p class="text-sm text-[#a7b09f] leading-relaxed mb-6">
+        Transforma o ponteiro em uma chamada para ação direta com ícone e texto dinâmico.
+      </p>
+      <div class="text-xs text-[#38bdf8] font-mono">Passe o mouse neste card ↗</div>
+    </div>
+
+    <!-- Card 3: Estilo Editorial & Design -->
+    <div id="pointerCard3" class="relative bg-[#1b211a] border border-[#323b2e] rounded-2xl p-8 hover:border-[#f472b6]/50 transition-colors shadow-xl group">
+      <div class="w-10 h-10 rounded-xl bg-[#f472b6]/10 border border-[#f472b6]/20 flex items-center justify-center text-[#f472b6] mb-5 font-bold">
+        03
+      </div>
+      <h3 class="text-xl font-medium text-[#f4f5ef] mb-2">Design & Review Mode</h3>
+      <p class="text-sm text-[#a7b09f] leading-relaxed mb-6">
+        Perfeito para indicar modos de edição, inspeção de design ou ferramentas de feedback em tempo real.
+      </p>
+      <div class="text-xs text-[#f472b6] font-mono">Passe o mouse neste card ↗</div>
+    </div>
+
+    <!-- Card 4: Minimalist Glow Pointer na cor verde Nexo (#d5fc78) -->
+    <div id="pointerCard4" class="relative bg-[#1b211a] border border-[#323b2e] rounded-2xl p-8 hover:border-[#d5fc78] transition-all shadow-xl group">
+      <div class="w-10 h-10 rounded-xl bg-[#d5fc78]/10 border border-[#d5fc78]/30 flex items-center justify-center text-[#d5fc78] mb-5 font-bold shadow-sm">
+        04
+      </div>
+      <h3 class="text-xl font-medium text-[#f4f5ef] mb-2 flex items-center gap-2">
+        <span>Minimalist Glow Pointer</span>
+        <span class="w-2 h-2 rounded-full bg-[#d5fc78] animate-pulse"></span>
+      </h3>
+      <p class="text-sm text-[#a7b09f] leading-relaxed mb-6">
+        Cursor minimalista na cor verde oficial do site (<code class="text-[#d5fc78] bg-[#121612] px-1.5 py-0.5 rounded">#d5fc78</code>) com halo de brilho neon suave e zero poluição visual.
+      </p>
+      <div class="text-xs text-[#d5fc78] font-mono flex items-center gap-1.5 font-semibold">
+        <span>Passe o mouse neste card</span>
+        <span>↗</span>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Scripts -->
+  <script src="components/magicui/pointer.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Figma Multiplayer Cursor
+      initPointer('#pointerCard1', {
+        label: 'Lucas Mendes · UI Designer',
+        iconColor: '#d5fc78',
+        badgeBg: '#182016',
+        badgeText: '#d5fc78',
+        badgeBorder: '#d5fc78'
+      });
+
+      // 2. Action Cursor
+      initPointer('#pointerCard2', {
+        label: 'Ver Case de Sucesso ↗',
+        iconColor: '#38bdf8',
+        badgeBg: '#082f49',
+        badgeText: '#38bdf8',
+        badgeBorder: '#38bdf8'
+      });
+
+      // 3. Review Mode Cursor
+      initPointer('#pointerCard3', {
+        label: 'Modo Inspeção ✦',
+        iconColor: '#f472b6',
+        badgeBg: '#831843',
+        badgeText: '#fbcfe8',
+        badgeBorder: '#f472b6'
+      });
+
+      // 4. Glow Pointer (sem badge)
+      initPointer('#pointerCard4', {
+        label: '',
+        iconColor: '#d5fc78',
+        glow: true,
+        glowColor: '#d5fc78'
+      });
+    });
+  </script>
+</body>
+</html>

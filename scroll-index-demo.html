@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kokonut UI — Scroll Index Demo</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+  </style>
+</head>
+<body class="bg-[#0e110e] text-[#f4f5ef] min-h-screen py-16 px-6 relative selection:bg-[#d5fc78] selection:text-[#182016]">
+
+  <!-- Header da Demonstração -->
+  <header class="max-w-2xl mx-auto mb-16 pb-8 border-b border-[#323b2e]">
+    <div class="inline-flex items-center gap-2 bg-[#d5fc78]/10 border border-[#d5fc78]/30 px-3 py-1 rounded-full text-[#d5fc78] text-[12px] font-semibold tracking-wider uppercase mb-4">
+      <span class="w-2 h-2 rounded-full bg-[#d5fc78] animate-pulse"></span>
+      Kokonut UI · Scroll Index
+    </div>
+    <h1 class="text-3xl sm:text-5xl font-medium tracking-tight text-[#f4f5ef] mb-3">
+      Scroll Index Navigator
+    </h1>
+    <p class="text-base text-[#a7b09f] leading-relaxed">
+      Observe a régua de navegação interativa no canto direito da tela. Passe o mouse sobre ela para ver o efeito de ampliação (dock swell) ou arraste/clique para navegar entre as seções.
+    </p>
+    <div class="mt-6 flex items-center gap-4">
+      <a href="index.html" class="inline-flex items-center gap-2 bg-[#d5fc78] hover:bg-[#c6f162] text-[#182016] font-semibold text-xs px-5 py-2.5 rounded-lg shadow-md transition-all">
+        <span>← Voltar para a Landing Page</span>
+      </a>
+      <a href="topo-demo.html" class="text-xs text-[#a7b09f] hover:text-[#d5fc78] transition-colors">
+        Ver Topo Background Demo →
+      </a>
+    </div>
+  </header>
+
+  <!-- Artigo com várias seções indexadas pelo Scroll Index -->
+  <main class="max-w-2xl mx-auto space-y-16 pb-32">
+    
+    <section>
+      <h2 class="text-2xl font-semibold text-[#f4f5ef] tracking-tight mb-4 flex items-center gap-3">
+        <span class="text-[#d5fc78]">01.</span> Introdução ao Scroll Index
+      </h2>
+      <p class="text-[#a7b09f] leading-relaxed mb-4">
+        O Scroll Index é um componente de navegação periférica inspirado em minimapas de editores de código e no efeito dock do macOS. Ele calcula dinamicamente a posição de cada título ou seção e mapeia em uma régua vertical compacta.
+      </p>
+      <p class="text-[#a7b09f] leading-relaxed">
+        À medida que você rola a página, o indicador de leitura acompanha suavemente o progresso, marcando seções já lidas como concluídas e destacando a seção atual.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-2xl font-semibold text-[#f4f5ef] tracking-tight mb-4 flex items-center gap-3">
+        <span class="text-[#d5fc78]">02.</span> Princípios de Design
+      </h2>
+      <p class="text-[#a7b09f] leading-relaxed mb-4">
+        Ao construir interfaces longas, manter o usuário ciente de sua localização sem poluir o conteúdo é um desafio constante. O Scroll Index soluciona isso com discrição:
+      </p>
+      <ul class="list-disc pl-6 space-y-2 text-[#a7b09f]">
+        <li><strong>Não intrusivo:</strong> Mantém-se silencioso na borda direita da viewport.</li>
+        <li><strong>Micro-interação tátil:</strong> Os marcadores se expandem magneticamente sob o cursor.</li>
+        <li><strong>Scrubbing instantâneo:</strong> Permite arrastar a régua para saltar instantaneamente.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2 class="text-2xl font-semibold text-[#f4f5ef] tracking-tight mb-4 flex items-center gap-3">
+        <span class="text-[#d5fc78]">03.</span> Acessibilidade e Teclado
+      </h2>
+      <p class="text-[#a7b09f] leading-relaxed mb-4">
+        O componente suporta navegação por teclado com setas de navegação (cima/baixo) e atributos <code class="bg-[#1b211a] text-[#d5fc78] px-1.5 py-0.5 rounded">aria-current="location"</code> para leitores de tela.
+      </p>
+      <p class="text-[#a7b09f] leading-relaxed">
+        Quando o leitor de tela foca em um marcador, ele anuncia o título da respectiva seção e a distância no documento.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-2xl font-semibold text-[#f4f5ef] tracking-tight mb-4 flex items-center gap-3">
+        <span class="text-[#d5fc78]">04.</span> Performance e Animações
+      </h2>
+      <p class="text-[#a7b09f] leading-relaxed mb-4">
+        Todas as transformações usam aceleração de hardware (<code class="bg-[#1b211a] text-[#d5fc78] px-1.5 py-0.5 rounded">transform: scaleX</code> e <code class="bg-[#1b211a] text-[#d5fc78] px-1.5 py-0.5 rounded">translateY</code>), garantindo 60fps constantes mesmo em páginas pesadas.
+      </p>
+      <p class="text-[#a7b09f] leading-relaxed">
+        O cálculo do progresso é desacoplado do ciclo de renderização e responde a eventos passivos de rolagem.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-2xl font-semibold text-[#f4f5ef] tracking-tight mb-4 flex items-center gap-3">
+        <span class="text-[#d5fc78]">05.</span> Conclusão e Próximos Passos
+      </h2>
+      <p class="text-[#a7b09f] leading-relaxed mb-4">
+        Com o Scroll Index e o Topo Background integrados, a experiência de navegação atinge um patamar interativo premium, condizente com produtos digitais de alta tecnologia.
+      </p>
+    </section>
+
+  </main>
+
+  <!-- Scripts -->
+  <script src="components/kokonutui/scroll-index.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      initScrollIndex({
+        selector: "h2",
+        scroller: "window",
+        railHeight: 260,
+        accentColor: "#d5fc78",
+        activeColor: "#d5fc78",
+        passedColor: "#a7b09f",
+        aheadColor: "#323b2e"
+      });
+    });
+  </script>
+</body>
+</html>

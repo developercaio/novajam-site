@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kokonut UI — Topo Background Demo</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+  </style>
+</head>
+<body class="bg-[#0e110e] text-[#f4f5ef] min-h-screen overflow-hidden flex flex-col items-center justify-center relative">
+
+  <!-- Container do Topo Background -->
+  <div id="topoContainer" class="absolute inset-0 w-full h-full"></div>
+
+  <!-- Conteúdo de Demonstração Centralizado -->
+  <div class="relative z-10 max-w-xl mx-auto px-6 text-center select-none pointer-events-none">
+    <div class="inline-flex items-center gap-2 bg-[#d5fc78]/10 border border-[#d5fc78]/30 px-3 py-1 rounded-full text-[#d5fc78] text-[12px] font-semibold tracking-wider uppercase mb-6">
+      <span class="w-2 h-2 rounded-full bg-[#d5fc78] animate-pulse"></span>
+      Kokonut UI · Topo Background
+    </div>
+
+    <h1 class="text-4xl sm:text-6xl font-semibold tracking-tight text-[#f4f5ef] mb-4">
+      Find your footing.
+    </h1>
+
+    <p class="text-base sm:text-lg text-[#a7b09f] leading-relaxed mb-8">
+      Mova o cursor para erguer uma colina em tempo real.<br>
+      Clique em qualquer lugar para enviar ondas circulares de relevo.
+    </p>
+
+    <div class="flex items-center justify-center gap-4 pointer-events-auto">
+      <a href="index.html" class="inline-flex items-center gap-2 bg-[#d5fc78] hover:bg-[#c6f162] text-[#182016] font-semibold text-sm px-6 py-3 rounded-lg shadow-lg transition-transform transform active:scale-95">
+        <span>← Voltar para a Landing Page</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Painel de Controles Flutuante -->
+  <div class="absolute bottom-6 right-6 z-20 bg-[#1b211a]/90 backdrop-blur-md border border-[#323b2e] rounded-xl p-4 text-xs flex flex-col gap-3 shadow-2xl">
+    <div class="font-semibold text-[#f4f5ef] border-b border-[#323b2e] pb-2">Controles do Topo Background</div>
+    <div class="flex items-center justify-between gap-4">
+      <span class="text-[#a7b09f]">Cor:</span>
+      <select id="colorSelect" class="bg-[#121612] border border-[#323b2e] rounded px-2 py-1 text-[#f4f5ef] focus:outline-none focus:border-[#d5fc78]">
+        <option value="#d5fc78">Verde Lima (#d5fc78)</option>
+        <option value="#ffffff">Branco Puro (#ffffff)</option>
+        <option value="#38bdf8">Azul Ciano (#38bdf8)</option>
+        <option value="#f472b6">Rosa Magenta (#f472b6)</option>
+      </select>
+    </div>
+    <div class="flex items-center justify-between gap-4">
+      <span class="text-[#a7b09f]">Velocidade:</span>
+      <input type="range" id="speedRange" min="0" max="2" step="0.1" value="0.8" class="w-24 accent-[#d5fc78]">
+    </div>
+  </div>
+
+  <!-- Script do Topo Background -->
+  <script src="components/kokonutui/topo-background.js"></script>
+  <script>
+    let topo = initTopoBackground('#topoContainer', {
+      speed: 0.8,
+      interval: 0.07,
+      interactive: true,
+      seed: 42,
+      labels: true,
+      color: '#d5fc78',
+      minorAlpha: 0.25,
+      majorAlpha: 0.65
+    });
+
+    // Controles interativos
+    document.getElementById('colorSelect').addEventListener('change', (e) => {
+      topo.destroy();
+      topo = initTopoBackground('#topoContainer', {
+        speed: parseFloat(document.getElementById('speedRange').value),
+        interval: 0.07,
+        interactive: true,
+        seed: 42,
+        labels: true,
+        color: e.target.value,
+        minorAlpha: 0.25,
+        majorAlpha: 0.65
+      });
+    });
+
+    document.getElementById('speedRange').addEventListener('input', (e) => {
+      topo.destroy();
+      topo = initTopoBackground('#topoContainer', {
+        speed: parseFloat(e.target.value),
+        interval: 0.07,
+        interactive: true,
+        seed: 42,
+        labels: true,
+        color: document.getElementById('colorSelect').value,
+        minorAlpha: 0.25,
+        majorAlpha: 0.65
+      });
+    });
+  </script>
+</body>
+</html>
